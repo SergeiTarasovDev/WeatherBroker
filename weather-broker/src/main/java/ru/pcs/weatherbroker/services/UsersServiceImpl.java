@@ -1,4 +1,4 @@
 package ru.pcs.weatherbroker.services;
 
-public class UsersServiceImpl {
+public interface UsersServiceImpl {
 }

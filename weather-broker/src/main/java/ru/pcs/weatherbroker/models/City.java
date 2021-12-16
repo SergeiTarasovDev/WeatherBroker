@@ -17,5 +17,9 @@ public class City {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String cityName;
-    private Double currentTemperature;
+    private Double temperature;
+    private Double pressure;
+    private Integer humidity;
+    private Double windSpeed;
+    private Integer windDeg;
 }

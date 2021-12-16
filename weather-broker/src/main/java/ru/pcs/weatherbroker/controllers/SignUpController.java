@@ -26,7 +26,7 @@ public class SignUpController {
                 .build();
         usersRepository.save(user);
 
-        return "redirect:/user_add.html";
+        return "redirect:/user_add";
     }*/
 
 //    private final SignUpService signUpService; //32
