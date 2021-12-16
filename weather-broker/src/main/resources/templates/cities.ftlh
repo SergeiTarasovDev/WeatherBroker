@@ -17,5 +17,23 @@
     </label>
     <input type="submit" value="Добавить">
 </form>
+
+
+<h1>список городов</h1>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Название</th>
+        <th>Текущая температура</th>
+    </tr>
+    <#list cities as city>
+        <tr>
+            <td>${city.id}</td>
+            <td>${city.cityName}</td>
+            <td>${city.currentTemperature}</td>
+        </tr>
+
+    </#list>
+</table>
 </body>
 </html>

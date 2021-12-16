@@ -11,19 +11,30 @@
 <body>
 <div class="main">
     <h1>Innopolis Weather Broker</h1>
-    <form method="post" action="/users">
-        <div>Регистрация пользователя</div>
-        <label> Логин
-            <input name="login">
-        </label>
-        <label> Пароль
-            <input type="password" name="password">
-        </label>
-        <label> E-Mail
+    <div class="wrap">
+    <form method="post" action="/usersAdd">
+        <div class="form-header">Регистрация пользователя</div>
+        <div> <label>E-Mail</label>
             <input type="email" name="email">
-        </label>
+        </div>
+        <div> <label>Пароль</label>
+            <input type="password" name="password">
+        </div>
+        <div> <label>Имя</label>
+            <input name="firstName">
+        </div>
+        <div> <label>Фамилия</label>
+            <input name="lastName">
+        </div>
+        <div> <label>Ваш город</label>
+            <select name="city">
+
+            </select>
+        </div>
+
         <input type="submit" value="Зарегистрироваться">
     </form>
+    </div>
 </div>
 </body>
 </html>

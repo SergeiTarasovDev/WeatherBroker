@@ -1,2 +1,8 @@
-h1 {color: red;}
-.main {width: 50%; max-width: 600px; margin: 20px auto;}
+h1 {color: indianred; margin-bottom: 60px;}
+div {padding: 8px 15px;}
+label {width: 100px; display: inline-block;}
+input[type="submit"] {margin: 20px auto 14px; display: block; padding: 10px 20px; font-size: 16px;}
+.main {max-width: max-content; margin: 20px auto;}
+.wrap {margin: 0 auto; width: fit-content;}
+.form-header {font-size: 20px; font-weight: 700; color: #777; text-align: center; padding-bottom: 20px;}
+form {border: solid 2px #777; border-radius: 8px; padding: 14px; background: #f0f8ffa8;}
