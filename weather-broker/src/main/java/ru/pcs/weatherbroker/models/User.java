@@ -26,7 +26,7 @@ public class User {
 
     @ManyToOne
     @JoinColumn(name = "city_id")
-    private City cityId;
+    private City city;
 
 
 }

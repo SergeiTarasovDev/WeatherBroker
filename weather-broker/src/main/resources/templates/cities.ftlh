@@ -33,6 +33,7 @@
         <th>Относительная влажность</th>
         <th>Скорость ветра</th>
         <th>Направление ветра</th>
+        <th>Действие</th>
     </tr>
     <#list cities as city>
         <tr>
@@ -43,6 +44,12 @@
             <td>${city.humidity}</td>
             <td>${city.windSpeed}</td>
             <td>${city.windDeg}</td>
+            <td>
+                <form method="post" action="/cities/${city.id}/delete">
+                    <input type="submit" value="Удалить">
+                </form>
+                <a href="/cities/${city.id}">Перейти</a>
+            </td>
         </tr>
 
     </#list>

@@ -1,49 +1,19 @@
 package ru.pcs.weatherbroker.services;
 
-import netscape.javascript.JSUtil;
+import ru.pcs.weatherbroker.forms.CityForm;
+import ru.pcs.weatherbroker.models.City;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
-public class CitiesService {
+public interface CitiesService {
+    public void addCity(CityForm form);
+    List<City> getAllCities();
+    void deleteUser(City city);
+    public Map<String, String> parseJson(String text);
 
-    public Map<String, String> parseJson(String text) {
+    Optional<City> getCity(Integer cityId);
 
-        Map<String, String> result = new HashMap<>();
-
-        text = text.replaceAll("\"", "");
-        text = text.replaceAll("\\:\\{", "");
-        text = text.replaceAll("\\{", "");
-        text = text.replaceAll("\\}", "");
-
-        System.out.println(text);
-
-        String firstPart;
-        String secondPart;
-
-        for (String line : text.split(",")) {
-            firstPart = line.split(":")[0];
-            secondPart = line.split(":")[1];
-            switch (firstPart) {
-                case "maintemp":
-                    result.put("temperature", secondPart);
-                    break;
-                case "pressure":
-                    double temp = Math.round(Integer.parseInt(secondPart) * 750.06 / 10);
-                    String pressure = (temp / 100) + " ";
-                    result.put("pressure", pressure);
-                    break;
-                case "humidity":
-                    result.put("humidity", secondPart);
-                    break;
-                case "windspeed":
-                    result.put("windSpeed", secondPart);
-                    break;
-                case "deg":
-                    result.put("windDeg", secondPart);
-                    break;
-            }
-        }
-
-        return result;
-    }
+    void updateCity(Integer cityId);
 }
