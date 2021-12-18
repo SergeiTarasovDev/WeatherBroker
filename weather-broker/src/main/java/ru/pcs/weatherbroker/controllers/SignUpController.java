@@ -1,47 +1,36 @@
 package ru.pcs.weatherbroker.controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.pcs.weatherbroker.forms.SignUpForm;
+import ru.pcs.weatherbroker.models.City;
 import ru.pcs.weatherbroker.models.User;
-import ru.pcs.weatherbroker.repositories.UsersRepository;
+import ru.pcs.weatherbroker.services.CitiesService;
 import ru.pcs.weatherbroker.services.SignUpService;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
-@RequestMapping("/sign_up")
+@RequestMapping("/signUp")
 public class SignUpController {
 
-/*    @Autowired
-    private UsersRepository usersRepository;*/
+    private final SignUpService signUpService;
+    private final CitiesService citiesService;
 
-    /*@PostMapping("/users") //28 - 23
-    public String addUser(@RequestParam("firstName") String firstName,
-                          @RequestParam("lastName") String lastName) {
-        User user = User.builder()
-                .firstName(firstName)
-                .lastName(lastName)
-                .build();
-        usersRepository.save(user);
-
-        return "redirect:/user_add";
-    }*/
-
-//    private final SignUpService signUpService; //32
-
-    /*@GetMapping
-    public String getSignUpPage() {
-        return "sign_up";
-    }*/
-
-/*    @PostMapping
-    public String signUpUser(SignUpForm form) {
-        signUpService.signUpUser(form);
-        return "redirect:/sidn_in";
-
+    @GetMapping
+    public String getSignUpPage(Model model) {
+        List<City> cities = citiesService.getAllCities();
+        model.addAttribute("cities", cities);
+        return "signUp";
     }
 
- */
+    @PostMapping
+    public String signUpUser(SignUpForm form) {
+        signUpService.signUpUser(form);
+        return "signIn";
+    }
+
 }

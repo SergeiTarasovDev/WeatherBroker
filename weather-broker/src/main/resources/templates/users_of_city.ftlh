@@ -6,7 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="/style.css" rel="stylesheet" type="text/css">
-    <title>IWB - Пользователи из выбранного города</title>
+    <title>Пользователи</title>
 </head>
 <body>
 
@@ -16,22 +16,20 @@
 
 <div class="main">
     <div class="content">
-        <h1>Пользователи из города <НАЗВАНИЕ ГОРОДА></h1>
-
         <table>
             <tr>
-                <th>id</th>
-                <th>login</th>
-                <th>name</th>
+                <th>ID</th>
+                <th>EMail</th>
+                <th>Имя</th>
+                <th>Фамилия</th>
             </tr>
-            <#list usersOfCity as user>
+            <#list users as user>
                 <tr>
                     <td>${user.id}</td>
                     <td>${user.email}</td>
                     <td>${user.firstName}</td>
                     <td>${user.lastName}</td>
                 </tr>
-
             </#list>
         </table>
     </div>

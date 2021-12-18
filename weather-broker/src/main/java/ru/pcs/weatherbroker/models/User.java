@@ -13,9 +13,17 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Builder
 public class User {
+
+    public enum Role {
+        ADMIN, USER
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Enumerated(value = EnumType.STRING)
+    private Role role;
 
     @Column(unique = true)
     private String email;
@@ -27,6 +35,4 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "city_id")
     private City city;
-
-
 }

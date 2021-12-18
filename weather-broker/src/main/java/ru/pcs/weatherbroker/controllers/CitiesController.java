@@ -6,10 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.pcs.weatherbroker.forms.CityForm;
 import ru.pcs.weatherbroker.models.City;
+import ru.pcs.weatherbroker.models.User;
 import ru.pcs.weatherbroker.services.CitiesService;
 
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class CitiesController {
@@ -29,12 +29,11 @@ public class CitiesController {
     }
 
     @GetMapping("/cities/{city-id}")
-    public String getCityPage(Model model, Integer cityId) {
-        Optional<City> city = citiesService.getCity(cityId);
+    public String getCityPage(Model model, @PathVariable("city-id") Integer cityId) {
+        City city = citiesService.getCity(cityId);
         model.addAttribute("city", city);
         return "city";
     }
-
 
     @PostMapping("/cities")
     public String addCity(CityForm form) {
@@ -48,10 +47,26 @@ public class CitiesController {
         return "redirect:/cities";
     }
 
-    /*@PostMapping("/cities/{city-id}/update")
-    public String updateCity(@PathVariable("city-id") Integer cityId) {
-        citiesService.updateCity(cityId);
-        return "redirect/cities/{city-id}";
-    }*/
+    @GetMapping("/cities/{city-id}/users")
+    public String getUsersByCity(Model model, @PathVariable("city-id") Integer cityId) {
+        List<User> users = citiesService.getUserByCity(cityId);
+        model.addAttribute("users", users);
+        return "users_of_city";
+    }
+
+    @GetMapping("/cities/{temperature}/temp-great")
+    public String getCitiesByTemperatureGreateThan(Model model, @PathVariable("temperature") Double temperature) {
+        List<City> cities = citiesService.getCitiesByTemperatureGreaterThan(temperature);
+        model.addAttribute("cities", cities);
+        return "cities";
+    }
+
+    @GetMapping("/cities/{temperature}/temp-less")
+    public String getCitiesByTemperatureLessThan(Model model, @PathVariable("temperature") Double temperature) {
+        List<City> cities = citiesService.getCitiesByTemperatureLessThan(temperature);
+        model.addAttribute("cities", cities);
+        return "cities";
+    }
+
 
 }
