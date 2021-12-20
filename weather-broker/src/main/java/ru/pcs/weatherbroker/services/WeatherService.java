@@ -1,12 +1,17 @@
 package ru.pcs.weatherbroker.services;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.*;
+import java.util.HashMap;
 import java.util.Map;
 
+@RequiredArgsConstructor
+@Component
 public class WeatherService {
     private static final String USER_AGENT = "Mozilla/5.0";
 
@@ -40,6 +45,47 @@ public class WeatherService {
         in.close();
 
         return response.toString();
+    }
+
+    public Map<String, String> parseJson(String text) {
+
+        Map<String, String> result = new HashMap<>();
+
+        text = text.replaceAll("\"", "");
+        text = text.replaceAll("\\:\\{", "");
+        text = text.replaceAll("\\{", "");
+        text = text.replaceAll("\\}", "");
+
+        System.out.println(text);
+
+        String firstPart;
+        String secondPart;
+
+        for (String line : text.split(",")) {
+            firstPart = line.split(":")[0];
+            secondPart = line.split(":")[1];
+            switch (firstPart) {
+                case "maintemp":
+                    result.put("temperature", secondPart);
+                    break;
+                case "pressure":
+                    double temp = Math.round(Integer.parseInt(secondPart) * 750.06 / 10);
+                    String pressure = (temp / 100) + " ";
+                    result.put("pressure", pressure);
+                    break;
+                case "humidity":
+                    result.put("humidity", secondPart);
+                    break;
+                case "windspeed":
+                    result.put("windSpeed", secondPart);
+                    break;
+                case "deg":
+                    result.put("windDeg", secondPart);
+                    break;
+            }
+        }
+
+        return result;
     }
 
 }

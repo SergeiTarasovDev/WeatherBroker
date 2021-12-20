@@ -17,24 +17,28 @@
 <div class="main">
     <div class="content">
 
-        <h2>Погода. ${city.cityName}</h2>
-        <table>
-            <tr>
-                <td class="column-name">Температура воздуха:</td><td class="column-value">${city.getTemperature()} °C</td>
-            </tr>
-            <tr>
-                <td class="column-name">Атмосферное давление:</td><td class="column-value">${city.getPressure()} мм. рт. ст.</td>
-            </tr>
-            <tr>
-                <td class="column-name">Относительная влажность:</td><td class="column-value">${city.getHumidity()} %</td>
-            </tr>
-            <tr>
-                <td class="column-name">Скорость ветра:</td><td class="column-value">${city.windSpeed} м/сек</td>
-            </tr>
-            <tr>
-                <td class="column-name">Направление ветра:</td><td class="column-value">${city.windDeg}°</td>
-            </tr>
-        </table>
+        <div class="city-weather">
+            <h2>г. ${city.getCityName()}</h2>
+            <table>
+                <tr><td>Текущая температура</td><td>${city.getTemperature()}</td></tr>
+                <tr><td>Атмосферное давление</td><td>${city.getPressure()}</td></tr>
+                <tr><td>Относительная влажность</td><td>${city.getHumidity()}</td></tr>
+                <tr><td>Скорость ветра</td><td>${city.getWindSpeed()}</td></tr>
+                <tr><td>Направление ветра</td><td>${city.getWindDeg()}</td></tr>
+            </table>
+        </div>
+
+        <div class="search-city-weather">
+            <h3>Узнать погоду в другом городе</h3>
+            <form method="get" action="/city">
+                <select name="cityId">
+                    <#list cities as city>
+                        <option value="${city.getId()}">${city.getCityName()}</option>
+                    </#list>
+                </select>
+                <input type="submit" value="Узнать">
+            </form>
+        </div>
     </div>
 </div>
 

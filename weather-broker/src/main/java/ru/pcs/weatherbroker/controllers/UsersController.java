@@ -1,6 +1,8 @@
 package ru.pcs.weatherbroker.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.web.method.annotation.AuthenticationPrincipalArgumentResolver;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -9,6 +11,7 @@ import ru.pcs.weatherbroker.models.User;
 import ru.pcs.weatherbroker.repositories.UsersRepository;
 import ru.pcs.weatherbroker.services.UsersService;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller

@@ -15,13 +15,16 @@ import java.util.*;
 @Component
 public class CitiesServiceImpl implements CitiesService {
 
+    @Autowired
+    private WeatherService weatherService;
+
     private final CitiesRepository citiesRepository;
     private final UsersRepository usersRepository;
 
     public void addCity(CityForm form) {
         try {
             String result = WeatherService.getWeather(form.getCityName());
-            Map<String, String> weather = parseJson(result);
+            Map<String, String> weather = weatherService.parseJson(result);
 
             City city = City.builder()
                     .cityName(form.getCityName())
@@ -70,47 +73,7 @@ public class CitiesServiceImpl implements CitiesService {
         return citiesRepository.findCityByTemperatureLessThan(temperature);
     }
 
-    @Override
-    public Map<String, String> parseJson(String text) {
 
-        Map<String, String> result = new HashMap<>();
-
-        text = text.replaceAll("\"", "");
-        text = text.replaceAll("\\:\\{", "");
-        text = text.replaceAll("\\{", "");
-        text = text.replaceAll("\\}", "");
-
-        System.out.println(text);
-
-        String firstPart;
-        String secondPart;
-
-        for (String line : text.split(",")) {
-            firstPart = line.split(":")[0];
-            secondPart = line.split(":")[1];
-            switch (firstPart) {
-                case "maintemp":
-                    result.put("temperature", secondPart);
-                    break;
-                case "pressure":
-                    double temp = Math.round(Integer.parseInt(secondPart) * 750.06 / 10);
-                    String pressure = (temp / 100) + " ";
-                    result.put("pressure", pressure);
-                    break;
-                case "humidity":
-                    result.put("humidity", secondPart);
-                    break;
-                case "windspeed":
-                    result.put("windSpeed", secondPart);
-                    break;
-                case "deg":
-                    result.put("windDeg", secondPart);
-                    break;
-            }
-        }
-
-        return result;
-    }
 
 
 }

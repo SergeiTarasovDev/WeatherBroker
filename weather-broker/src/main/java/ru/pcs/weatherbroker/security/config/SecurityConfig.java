@@ -26,13 +26,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
 
         http.authorizeRequests()
-                .antMatchers("/users").authenticated() // те кто вошел
+                .antMatchers("/account").authenticated() // те кто вошел
+                .antMatchers("/administrator").authenticated()
+                .antMatchers("/cities/**").authenticated()
+                .antMatchers("/city").authenticated()
                 //.antMatchers("/users/**").hasAuthority("ADMIN") // админ
                 .antMatchers("/signUp").permitAll() // все
                 .and()
                 .formLogin()
                 .loginPage("/signIn")
-                .defaultSuccessUrl("/users")
+                .defaultSuccessUrl("/account")
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .permitAll();

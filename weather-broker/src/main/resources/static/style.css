@@ -4,13 +4,16 @@ body {margin: 0 auto; display: table; min-height: 100vh; width: -webkit-fill-ava
 .content {width: max-content; margin: 0 auto;}
 .footer {padding: 30px; text-align: center; font-size: 1.3em; border-top: solid 1px #ccc;}
 .logout {position: fixed; right: 0; top: 0; padding: 10px 20px;}
-
-/*h1 {color: indianred; margin-bottom: 60px;}
-div {padding: 8px 15px;}
-label {width: 100px; display: inline-block;}
-input[type="submit"] {margin: 20px auto 14px; display: block; padding: 10px 20px; font-size: 16px;}
-.wrap {margin: 0 auto; width: fit-content;}
-.form-header {font-size: 20px; font-weight: 700; color: #777; text-align: center; padding-bottom: 20px;}
-form {border: solid 2px #777; border-radius: 8px; padding: 14px; background: #f0f8ffa8;}
-td {width: max-content; padding: 6px 12px;}
-*/
+.logout p {text-align: right; margin: 4px 10px;}
+.city-weather {width: max-content; margin: 0 auto 30px;}
+.city-weather, .search-city-weather {margin-bottom: 40px; border: solid 1px #aaa; border-radius: 14px; padding: 20px;}
+.search-city-weather form {width: max-content; margin: 0 auto;}
+.search-city-weather select {font-size: 17px; padding: 4px 5px 6px; vertical-align: top; display: inline;}
+.search-city-weather input[type="submit"] {font-size: 21px; padding: 0 5px; margin: 0 9px;}
+h2, h3 {margin: 0 0 13px;}
+h2 {border-bottom: solid 2px green; padding-bottom: 6px;}
+.param-name, .param-value {margin: 3px; padding: 5px 10px; border-radius: 7px;}
+.param-temperature {background: #e6caad6e;}
+.param-pressure {background: #b1e6ad6e;}
+.param-humidity {background: #e6e4ad6e;}
+.param-wind {background: #add8e66e;}

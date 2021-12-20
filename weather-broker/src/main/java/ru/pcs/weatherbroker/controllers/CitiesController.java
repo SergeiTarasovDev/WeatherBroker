@@ -28,9 +28,11 @@ public class CitiesController {
         return "cities";
     }
 
-    @GetMapping("/cities/{city-id}")
-    public String getCityPage(Model model, @PathVariable("city-id") Integer cityId) {
+    @GetMapping("/city")
+    public String getCityPage(Model model, @RequestParam(name = "cityId") Integer cityId) {
+        List<City> cities = citiesService.getAllCities();
         City city = citiesService.getCity(cityId);
+        model.addAttribute("cities", cities);
         model.addAttribute("city", city);
         return "city";
     }
@@ -54,6 +56,13 @@ public class CitiesController {
         return "users_of_city";
     }
 
+    @GetMapping("/cities/{city-id}/weather")
+    public String getWeatherByCity(Model model, @PathVariable("city-id") Integer cityId) {
+        City city = citiesService.getCity(cityId);
+        model.addAttribute("city", city);
+        return "city";
+    }
+
     @GetMapping("/cities/{temperature}/temp-great")
     public String getCitiesByTemperatureGreateThan(Model model, @PathVariable("temperature") Double temperature) {
         List<City> cities = citiesService.getCitiesByTemperatureGreaterThan(temperature);
@@ -68,5 +77,12 @@ public class CitiesController {
         return "cities";
     }
 
+    @GetMapping("/cities/")
+    public String getCity(Model model, @PathVariable("city-id") Integer cityId) {
+        System.out.println(cityId);
+        City city = citiesService.getCity(cityId);
+        model.addAttribute("city", city);
+        return "city";
+    }
 
 }
