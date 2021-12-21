@@ -6,36 +6,67 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="/style.css" rel="stylesheet" type="text/css">
-    <title>IWB - Список пользователей</title>
+    <title>IWB - Города</title>
 </head>
 <body>
 
-<div class="logout"><a href="/logout">logout</a></div>
+<div class="menu">
+    <p><a href="/logout">выход</a></p>
+</div>
 
 <div class="header"><h1>Innopolis Weather Broker</h1></div>
 
 <div class="main">
     <div class="content">
-            <h1>список пользователей</h1>
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>E-mail</th>
-                <th>Имя</th>
-                <th>Фамилия</th>
-                <th>Категория</th>
-            </tr>
-            <#list users as user>
-                <tr>
-                    <td><a href="/users/${user.id}/user">${user.id}</a></td>
-                    <td>${user.email}</td>
-                    <td>${user.firstName}</td>
-                    <td>${user.lastName}</td>
-                    <td>${user.role}</td>
-                </tr>
+        <div class="tabs">
+            <div class="tab">
+                <a href="/administrator/cities">Города</a>
+            </div>
+            <div class="tab active">
+                Пользователи
+            </div>
+        </div>
+        <div class="data">
 
-            </#list>
-        </table>
+            <div class="filter">
+                <h3>Фильтр</h3>
+                <div>
+                    <ul>
+                        <li><a href="/cities/0/temp-great">Все пользователи</a></li>
+                        <li><a href="/cities/0/temp-great">Пользователи из выбранного города</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <h2>Список пользователей</h2>
+            <table>
+                <tr>
+                    <th><div class="th">ID</div></th>
+                    <th><div class="th">Email</div></th>
+                    <th><div class="th">Имя</div></th>
+                    <th><div class="th">Фамилия</div></th>
+                    <th><div class="th">Город</div></th>
+                    <th><div class="th">Права</div></th>
+                    <th><div class="th">Действие</div></th>
+                </tr>
+                <#list users as user>
+                    <tr>
+                        <td>${user.getId()}</td>
+                        <td>${user.getEmail()}</td>
+                        <td>${user.getFirstName()}</td>
+                        <td>${user.getLastName()}</td>
+                        <td>${user.getCity().getCityName()}</td>
+                        <td>${user.getRole()}</td>
+                        <td>
+                            <form method="post" action="/administrator/users/${user.id}/delete">
+                                <input type="submit" value="Удалить">
+                            </form>
+                        </td>
+                    </tr>
+
+                </#list>
+            </table>
+        </div>
     </div>
 </div>
 

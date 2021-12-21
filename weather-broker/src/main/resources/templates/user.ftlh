@@ -16,23 +16,12 @@
 
 <div class="main">
     <div class="content">
-
         <table>
-            <tr>
-                <td class="column-name">Имя:</td><td class="column-value">${user.firstName}</td>
-            </tr>
-            <tr>
-                <td class="column-name">Фамилия:</td><td class="column-value">${user.lastName}</td>
-            </tr>
-            <tr>
-                <td class="column-name">Email:</td><td class="column-value">${user.email}</td>
-            </tr>
-            <tr>
-                <td class="column-name">Город:</td><td class="column-value">${user.getCity().cityName}</td>
-            </tr>
-            <tr>
-                <td class="column-name">Права:</td><td class="column-value">${user.role}</td>
-            </tr>
+            <tr><td class="column-name">Имя:</td><td class="column-value">${user.firstName}</td></tr>
+            <tr><td class="column-name">Фамилия:</td><td class="column-value">${user.lastName}</td></tr>
+            <tr><td class="column-name">Email:</td><td class="column-value">${user.email}</td></tr>
+            <tr><td class="column-name">Город:</td><td class="column-value">${user.getCity().cityName}</td></tr>
+            <tr><td class="column-name">Права:</td><td class="column-value">${user.role}</td></tr>
         </table>
     </div>
 </div>

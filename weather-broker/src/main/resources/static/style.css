@@ -1,19 +1,32 @@
 body {margin: 0 auto; display: table; min-height: 100vh; width: -webkit-fill-available; width: -moz-available;}
+a, a:hover, a:focus, a:active, a:visited {color: #555; text-decoration: none;}
+h2, h3 {margin: 0 0 13px;}
+h2 {border-bottom: solid 2px #b4c9b4; padding-bottom: 6px;}
 .header {margin: 50px auto; width: max-content;}
 .main {display: table-row; height: 100%;}
 .content {width: max-content; margin: 0 auto;}
 .footer {padding: 30px; text-align: center; font-size: 1.3em; border-top: solid 1px #ccc;}
-.logout {position: fixed; right: 0; top: 0; padding: 10px 20px;}
-.logout p {text-align: right; margin: 4px 10px;}
+.menu {position: fixed; right: 0; top: 0; padding: 10px 20px;}
+.menu p {text-align: right; margin: 4px 10px;}
+
+/* user page */
 .city-weather {width: max-content; margin: 0 auto 30px;}
 .city-weather, .search-city-weather {margin-bottom: 40px; border: solid 1px #aaa; border-radius: 14px; padding: 20px;}
 .search-city-weather form {width: max-content; margin: 0 auto;}
 .search-city-weather select {font-size: 17px; padding: 4px 5px 6px; vertical-align: top; display: inline;}
 .search-city-weather input[type="submit"] {font-size: 21px; padding: 0 5px; margin: 0 9px;}
-h2, h3 {margin: 0 0 13px;}
-h2 {border-bottom: solid 2px green; padding-bottom: 6px;}
 .param-name, .param-value {margin: 3px; padding: 5px 10px; border-radius: 7px;}
 .param-temperature {background: #e6caad6e;}
 .param-pressure {background: #b1e6ad6e;}
 .param-humidity {background: #e6e4ad6e;}
 .param-wind {background: #add8e66e;}
+
+/* administrator page */
+.city-add {text-align: right;}
+th {padding: 3px 7px;}
+.th {width: min-content;}
+.tabs {margin: 6px 34px;}
+.tab {display: inline-block; border: solid 2px #ccc; margin: -8px -2px; padding: 7px 12px; font-size: 17px; border-radius: 10px 10px 0 0; border-color: #ccc #ccc green; background: #eee;}
+.data {border: solid 2px green; margin: 0; padding: 20px; border-radius: 6px;}
+.active {border: solid 2px green; background: #c4e1c4; border-bottom: solid 2px #c4e1c4; color: #484848; font-weight: 700;}
+.filter {margin-bottom: 40px;}

@@ -5,8 +5,10 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import ru.pcs.weatherbroker.forms.UserForm;
 import ru.pcs.weatherbroker.models.City;
 import ru.pcs.weatherbroker.models.User;
 import ru.pcs.weatherbroker.services.CitiesService;
@@ -31,11 +33,10 @@ public class AccountController {
         List<City> cities = citiesService.getAllCities();
 
         model.addAttribute("user", user);
-        //model.addAttribute("city", user.getCity());
         model.addAttribute("cities", cities);
 
         if (userRole.equals("ADMIN")) {
-            return "redirect:/administrator";
+            return "redirect:/administrator/cities";
         }
         return "account";
     }
@@ -55,12 +56,20 @@ public class AccountController {
         return "account";
     }
 
-    @GetMapping("/administrator")
-    public String getAdministrator(Model model,
-                                   @AuthenticationPrincipal(expression = "id") Integer authId) {
+    @GetMapping("account/config")
+    public String getConfig(Model model,
+                            @AuthenticationPrincipal(expression = "id") Integer authId) {
         User user = usersService.getUser(authId);
+        List<City> cities = citiesService.getAllCities();
         model.addAttribute("user", user);
-        return "administrator";
+        model.addAttribute("cities", cities);
+        return "accountConfig";
+    }
+
+    @PostMapping("account/{user-id}/update")
+    public String update(@PathVariable("user-id") Integer userId, UserForm userForm) {
+        usersService.update(userId, userForm);
+        return "redirect:/account";
     }
 
 }

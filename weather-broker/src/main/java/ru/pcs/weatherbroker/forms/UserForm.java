@@ -1,6 +1,7 @@
 package ru.pcs.weatherbroker.forms;
 
 import lombok.Data;
+import ru.pcs.weatherbroker.models.City;
 
 @Data
 public class UserForm {
@@ -8,4 +9,5 @@ public class UserForm {
     String password;
     String firstName;
     String lastName;
+    City city;
 }

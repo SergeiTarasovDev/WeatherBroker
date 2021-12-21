@@ -3,6 +3,10 @@ package ru.pcs.weatherbroker.services;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import ru.pcs.weatherbroker.forms.UserForm;
+import ru.pcs.weatherbroker.models.City;
+import ru.pcs.weatherbroker.models.User;
+import ru.pcs.weatherbroker.repositories.CitiesRepository;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -14,6 +18,9 @@ import java.util.Map;
 @Component
 public class WeatherService {
     private static final String USER_AGENT = "Mozilla/5.0";
+
+    @Autowired
+    CitiesRepository citiesRepository;
 
     /**
      * The method gets the weather in the city by the zip-code from API OpenWeather
@@ -87,5 +94,18 @@ public class WeatherService {
 
         return result;
     }
+
+    public void update(City city, Map<String, String> weather) {
+        System.out.print(city.getTemperature() + " -> ");
+        city.setTemperature(Double.parseDouble(weather.get("temperature")));
+        city.setPressure(Double.parseDouble(weather.get("pressure")));
+        city.setHumidity(Integer.parseInt(weather.get("humidity")));
+        city.setWindSpeed(Double.parseDouble("windSpeed"));
+        city.setWindDeg(Integer.parseInt("windDeg"));
+        System.out.println(weather.get("temperature"));
+
+        citiesRepository.save(city);
+    }
+
 
 }

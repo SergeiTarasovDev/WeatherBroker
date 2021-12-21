@@ -10,7 +10,7 @@ import java.util.Map;
 public interface CitiesService {
     void addCity(CityForm form);
     List<City> getAllCities();
-    void deleteUser(City city);
+    void deleteCity(Integer cityId);
 
     City getCity(Integer cityId);
 

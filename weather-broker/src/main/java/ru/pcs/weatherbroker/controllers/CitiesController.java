@@ -1,6 +1,7 @@
 package ru.pcs.weatherbroker.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,13 +22,26 @@ public class CitiesController {
         this.citiesService = citiesService;
     }
 
-    @GetMapping("/cities")
+    @GetMapping("administrator/cities")
     public String getAllCities(Model model) {
         List<City> cities = citiesService.getAllCities();
         model.addAttribute("cities", cities);
         return "cities";
     }
 
+    @PostMapping("/administrator/cities")
+    public String addCity(CityForm form) {
+        citiesService.addCity(form);
+        return "redirect:/administrator/cities";
+    }
+
+    @PostMapping("/administrator/cities/{city-id}/delete")
+    public String deleteCity(@PathVariable("city-id") Integer cityId) {
+        citiesService.deleteCity(cityId);
+        return "redirect:/administrator/cities";
+    }
+
+/*
     @GetMapping("/city")
     public String getCityPage(Model model, @RequestParam(name = "cityId") Integer cityId) {
         List<City> cities = citiesService.getAllCities();
@@ -35,18 +49,6 @@ public class CitiesController {
         model.addAttribute("cities", cities);
         model.addAttribute("city", city);
         return "city";
-    }
-
-    @PostMapping("/cities")
-    public String addCity(CityForm form) {
-        citiesService.addCity(form);
-        return "redirect:/cities";
-    }
-
-    @PostMapping("/cities/{city-id}/delete")
-    public String deleteCity(@PathVariable("city-id") City city) {
-        citiesService.deleteUser(city);
-        return "redirect:/cities";
     }
 
     @GetMapping("/cities/{city-id}/users")
@@ -84,5 +86,7 @@ public class CitiesController {
         model.addAttribute("city", city);
         return "city";
     }
+
+ */
 
 }

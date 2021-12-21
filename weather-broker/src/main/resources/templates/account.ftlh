@@ -10,9 +10,11 @@
 </head>
 <body>
 
-<div class="logout">
-    <p><a href="/account">${user.getLastName()} ${user.getFirstName()}</a></p>
-    <p><a href="/logout">logout</a></p>
+<div class="menu">
+    <p style="font-size: 20px; border-bottom: solid 2px green; padding: 0 10px; margin-bottom: 7px;">
+        <a href="/account">${user.getFirstName()} ${user.getLastName()}</a></p>
+    <p><a href="/account/config">настройки</a></p>
+    <p><a href="/logout">выход</a></p>
 </div>
 
 <div class="header"><h1>Innopolis Weather Broker</h1></div>
@@ -23,11 +25,21 @@
             <h2>г. ${user.getCity().getCityName()}</h2>
 
             <table>
-                <tr><td><div class="param-name param-temperature">Текущая температура</div></td><td><div class="param-value param-temperature">${user.getCity().getTemperature()} °С</div></td></tr>
-                <tr><td><div class="param-name param-pressure">Атмосферное давление</div></td><td><div class="param-value param-pressure">${user.getCity().getPressure()} мм. рт. ст.</div></td></tr>
-                <tr><td><div class="param-name param-humidity">Относительная влажность</div></td><td><div class="param-value param-humidity">${user.getCity().getHumidity()} %</div></td></tr>
-                <tr><td><div class="param-name param-wind">Скорость ветра</div></td><td><div class="param-value param-wind">${user.getCity().getWindSpeed()} м/сек</div></td></tr>
-                <tr><td><div class="param-name param-wind">Направление ветра</div></td><td><div class="param-value param-wind">${user.getCity().getWindDeg()}°</div></td></tr>
+                <tr>
+                    <td><div class="param-name param-temperature">Текущая температура</div></td>
+                    <td><div class="param-value param-temperature">${user.getCity().getTemperature()} °С</div></td></tr>
+                <tr>
+                    <td><div class="param-name param-pressure">Атмосферное давление</div></td>
+                    <td><div class="param-value param-pressure">${user.getCity().getPressure()} мм. рт. ст.</div></td></tr>
+                <tr>
+                    <td><div class="param-name param-humidity">Относительная влажность</div></td>
+                    <td><div class="param-value param-humidity">${user.getCity().getHumidity()} %</div></td></tr>
+                <tr>
+                    <td><div class="param-name param-wind">Скорость ветра</div></td>
+                    <td><div class="param-value param-wind">${user.getCity().getWindSpeed()} м/сек</div></td></tr>
+                <tr>
+                    <td><div class="param-name param-wind">Направление ветра</div></td>
+                    <td><div class="param-value param-wind">${user.getCity().getWindDeg()}°</div></td></tr>
             </table>
         </div>
 
@@ -49,11 +61,21 @@
                 <h2>г. ${city.getCityName()}</h2>
 
                 <table>
-                    <tr><td><div class="param-name param-temperature">Текущая температура</div></td><td><div class="param-value param-temperature">${city.getTemperature()} °C</div></td></tr>
-                    <tr><td><div class="param-name param-pressure">Атмосферное давление</div></td><td><div class="param-value param-pressure">${city.getPressure()} мм. рт. ст.</div></td></tr>
-                    <tr><td><div class="param-name param-humidity">Относительная влажность</div></td><td><div class="param-value param-humidity">${city.getHumidity()} %</div></td></tr>
-                    <tr><td><div class="param-name param-wind">Скорость ветра</div></td><td><div class="param-value param-wind">${city.getWindSpeed()} м/сек</div></td></tr>
-                    <tr><td><div class="param-name param-wind">Направление ветра</div></td><td><div class="param-value param-wind">${city.getWindDeg()}°</div></td></tr>
+                    <tr>
+                        <td><div class="param-name param-temperature">Текущая температура</div></td>
+                        <td><div class="param-value param-temperature">${city.getTemperature()} °C</div></td></tr>
+                    <tr>
+                        <td><div class="param-name param-pressure">Атмосферное давление</div></td>
+                        <td><div class="param-value param-pressure">${city.getPressure()} мм. рт. ст.</div></td></tr>
+                    <tr>
+                        <td><div class="param-name param-humidity">Относительная влажность</div></td>
+                        <td><div class="param-value param-humidity">${city.getHumidity()} %</div></td></tr>
+                    <tr>
+                        <td><div class="param-name param-wind">Скорость ветра</div></td>
+                        <td><div class="param-value param-wind">${city.getWindSpeed()} м/сек</div></td></tr>
+                    <tr>
+                        <td><div class="param-name param-wind">Направление ветра</div></td>
+                        <td><div class="param-value param-wind">${city.getWindDeg()}°</div></td></tr>
                 </table>
             </div>
         </#if>
