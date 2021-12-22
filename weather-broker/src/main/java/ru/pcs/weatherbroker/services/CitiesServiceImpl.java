@@ -15,28 +15,27 @@ import java.util.*;
 @Component
 public class CitiesServiceImpl implements CitiesService {
 
-    @Autowired
-    private WeatherService weatherService;
-
+    private final WeatherService weatherService;
     private final CitiesRepository citiesRepository;
     private final UsersRepository usersRepository;
 
     public void addCity(CityForm form) {
         try {
-            String result = WeatherService.getWeather(form.getCityName());
-            Map<String, String> weather = weatherService.parseJson(result);
+            String result = weatherService.getWeather(form.getCityName());
+            if (!result.equals("-1")) {
+                Map<String, String> weather = weatherService.parseJson(result);
 
-            City city = City.builder()
-                    .cityName(form.getCityName())
-                    .temperature(Double.parseDouble(weather.get("temperature")))
-                    .pressure(Double.parseDouble(weather.get("pressure")))
-                    .humidity(Integer.parseInt(weather.get("humidity")))
-                    .windSpeed(Double.parseDouble(weather.get("windSpeed")))
-                    .windDeg(Integer.parseInt(weather.get("windDeg")))
-                    .build();
+                City city = City.builder()
+                        .cityName(form.getCityName())
+                        .temperature(Double.parseDouble(weather.get("temperature")))
+                        .pressure(Double.parseDouble(weather.get("pressure")))
+                        .humidity(Integer.parseInt(weather.get("humidity")))
+                        .windSpeed(Double.parseDouble(weather.get("windSpeed")))
+                        .windDeg(Integer.parseInt(weather.get("windDeg")))
+                        .build();
 
-            citiesRepository.save(city);
-
+                citiesRepository.save(city);
+            }
         } catch (Exception e) {
             System.out.println("Вы ввели неверный код");
             throw new IllegalArgumentException(e);

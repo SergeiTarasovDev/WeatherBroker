@@ -1,5 +1,6 @@
 package ru.pcs.weatherbroker.controllers;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -11,13 +12,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ru.pcs.weatherbroker.forms.UserForm;
 import ru.pcs.weatherbroker.models.City;
 import ru.pcs.weatherbroker.models.User;
+import ru.pcs.weatherbroker.services.AccountService;
 import ru.pcs.weatherbroker.services.CitiesService;
 import ru.pcs.weatherbroker.services.UsersService;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @Controller
 public class AccountController {
+
+    @Autowired
+    private AccountService accountService;
 
     @Autowired
     private UsersService usersService;
@@ -27,25 +33,19 @@ public class AccountController {
 
     @GetMapping("/account")
     public String getUserAccount(Model model,
-                                 @AuthenticationPrincipal(expression = "id") Integer authId) {
+                                 @AuthenticationPrincipal(expression = "id") Integer authId) throws InterruptedException {
         User user = usersService.getUser(authId);
-        String userRole = user.getRole().toString();
         List<City> cities = citiesService.getAllCities();
-
         model.addAttribute("user", user);
         model.addAttribute("cities", cities);
 
-        if (userRole.equals("ADMIN")) {
-            return "redirect:/administrator/cities";
-        }
-        return "account";
+        return accountService.getAuthorizedUserPage(authId);
     }
 
     @GetMapping(value = "/account", params = "cityId")
     public String getCityPage(Model model,
                               @RequestParam(name = "cityId") Integer cityId,
                               @AuthenticationPrincipal(expression = "id") Integer authId) {
-        System.out.println("2");
         User user = usersService.getUser(authId);
         List<City> cities = citiesService.getAllCities();
         City city = citiesService.getCity(cityId);
@@ -68,7 +68,7 @@ public class AccountController {
 
     @PostMapping("account/{user-id}/update")
     public String update(@PathVariable("user-id") Integer userId, UserForm userForm) {
-        usersService.update(userId, userForm);
+        usersService.updateUser(userId, userForm);
         return "redirect:/account";
     }
 

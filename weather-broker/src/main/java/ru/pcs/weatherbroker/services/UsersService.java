@@ -1,6 +1,7 @@
 package ru.pcs.weatherbroker.services;
 
 import ru.pcs.weatherbroker.forms.UserForm;
+import ru.pcs.weatherbroker.forms.UserFormForAdmin;
 import ru.pcs.weatherbroker.models.City;
 import ru.pcs.weatherbroker.models.User;
 
@@ -10,7 +11,8 @@ public interface UsersService {
     User getUser(Integer userId);
     List<User> getAllUsers();
     void deleteUser(Integer userId);
-    void update(Integer userId, UserForm userForm);
+    void updateUser(Integer userId, UserForm userForm);
+    void updateUserForAdmin(Integer userId, UserFormForAdmin userFormForAdmin);
 
     /*void addUser(UserForm form);
 

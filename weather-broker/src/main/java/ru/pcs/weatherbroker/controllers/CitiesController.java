@@ -35,7 +35,8 @@ public class CitiesController {
         return "redirect:/administrator/cities";
     }
 
-    @PostMapping("/administrator/cities/{city-id}/delete")
+
+    @DeleteMapping("/administrator/cities/{city-id}/delete")
     public String deleteCity(@PathVariable("city-id") Integer cityId) {
         citiesService.deleteCity(cityId);
         return "redirect:/administrator/cities";

@@ -1,13 +1,17 @@
 package ru.pcs.weatherbroker;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.task.TaskExecutor;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.method.annotation.AuthenticationPrincipalArgumentResolver;
-import ru.pcs.weatherbroker.services.WeatherDaemon;
+import ru.pcs.weatherbroker.services.WeatherService;
 
+@EnableAsync
 @SpringBootApplication
 public class WeatherBrokerApplication {
 
@@ -21,10 +25,6 @@ public class WeatherBrokerApplication {
         SpringApplication.run(WeatherBrokerApplication.class, args);
         System.out.println("\n------------------------> Application is run <------------------------");
 
-        // todo: исправить ошибку запуска демона
-        /*WeatherDaemon weatherDaemon = new WeatherDaemon();
-        weatherDaemon.setDaemon(true);
-        weatherDaemon.start();*/
     }
 
 }

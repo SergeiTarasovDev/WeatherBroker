@@ -2,20 +2,24 @@ package ru.pcs.weatherbroker.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import ru.pcs.weatherbroker.forms.UserForm;
 import ru.pcs.weatherbroker.models.City;
 import ru.pcs.weatherbroker.models.User;
 import ru.pcs.weatherbroker.repositories.CitiesRepository;
 
+import javax.annotation.PostConstruct;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.*;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RequiredArgsConstructor
-@Component
+@Service
 public class WeatherService {
     private static final String USER_AGENT = "Mozilla/5.0";
 
@@ -30,28 +34,29 @@ public class WeatherService {
      * @param cityName city name by which you need to get data
      * @throws Exception
      */
-    public static String getWeather(String cityName) throws Exception {
+    public String getWeather(String cityName) {
         String url = "http://api.openweathermap.org/data/2.5/weather?q=" + cityName + ",ru&callback=test&lang=ru&appid=cf24ec3cb89a0e6975864d4439b03f69&units=metric";
+        try {
+            URL objUrl = new URL(url);
+            HttpURLConnection con = (HttpURLConnection) objUrl.openConnection();
+            con.setRequestMethod("GET");
+            con.setRequestProperty("User-Agent", USER_AGENT);
 
-        URL objUrl = new URL(url);
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(con.getInputStream()));
+            String inputLine;
+            StringBuffer response = new StringBuffer();
 
-        HttpURLConnection con = (HttpURLConnection) objUrl.openConnection();
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
 
-        con.setRequestMethod("GET");
-        con.setRequestProperty("User-Agent", USER_AGENT);
-//        int responseCode = con.getResponseCode();
-
-        BufferedReader in = new BufferedReader(
-                new InputStreamReader(con.getInputStream()));
-        String inputLine;
-        StringBuffer response = new StringBuffer();
-
-        while ((inputLine = in.readLine()) != null) {
-            response.append(inputLine);
+            return response.toString();
+        } catch (Exception e) {
+            System.out.println("Weather API get error");
+            return "-1";
         }
-        in.close();
-
-        return response.toString();
     }
 
     public Map<String, String> parseJson(String text) {
@@ -62,8 +67,6 @@ public class WeatherService {
         text = text.replaceAll("\\:\\{", "");
         text = text.replaceAll("\\{", "");
         text = text.replaceAll("\\}", "");
-
-        System.out.println(text);
 
         String firstPart;
         String secondPart;
@@ -96,16 +99,37 @@ public class WeatherService {
     }
 
     public void update(City city, Map<String, String> weather) {
-        System.out.print(city.getTemperature() + " -> ");
+        System.out.println(city.getCityName());
+        System.out.println(city.getTemperature() + ", " + city.getPressure() + ", " + city.getHumidity() + ", " + city.getWindSpeed() + ", " + city.getWindDeg());
         city.setTemperature(Double.parseDouble(weather.get("temperature")));
         city.setPressure(Double.parseDouble(weather.get("pressure")));
         city.setHumidity(Integer.parseInt(weather.get("humidity")));
-        city.setWindSpeed(Double.parseDouble("windSpeed"));
-        city.setWindDeg(Integer.parseInt("windDeg"));
-        System.out.println(weather.get("temperature"));
+        city.setWindSpeed(Double.parseDouble(weather.get("windSpeed")));
+        city.setWindDeg(Integer.parseInt(weather.get("windDeg")));
+        System.out.println(city.getTemperature() + ", " + city.getPressure() + ", " + city.getHumidity() + ", " + city.getWindSpeed() + ", " + city.getWindDeg());
 
         citiesRepository.save(city);
     }
 
+    @Async
+    public void getNewWeather() {
+        while (true) {
+            List<City> cities = citiesRepository.findAll();
 
+            try {
+                    for (City city : cities) {
+                        String unparsedWeather = this.getWeather(city.getCityName());
+                        if (unparsedWeather.equals("-1")) {
+                            break;
+                        }
+                        Map<String, String> weather = this.parseJson(unparsedWeather);
+
+                        this.update(city, weather);
+                        Thread.sleep(20000);
+                    }
+            } catch (Exception e) {
+                System.out.println("Ошибка получения погоды: " + e);
+            }
+        }
+    }
 }

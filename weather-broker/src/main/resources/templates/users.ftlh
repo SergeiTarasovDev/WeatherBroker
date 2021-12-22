@@ -47,16 +47,44 @@
                     <th><div class="th">Фамилия</div></th>
                     <th><div class="th">Город</div></th>
                     <th><div class="th">Права</div></th>
-                    <th><div class="th">Действие</div></th>
+                    <th><div class="th" colspan="2">Действие</div></th>
                 </tr>
                 <#list users as user>
                     <tr>
                         <td>${user.getId()}</td>
-                        <td>${user.getEmail()}</td>
-                        <td>${user.getFirstName()}</td>
-                        <td>${user.getLastName()}</td>
-                        <td>${user.getCity().getCityName()}</td>
-                        <td>${user.getRole()}</td>
+                        <#if editUser?? && cities?? && editUser.getId() == user.getId()>
+                            <form method="post" action="/administrator/users/${user.id}/update">
+                                <td><input name="email" value="${user.getEmail()}"></td>
+                                <td><input name="firstName" value="${user.getFirstName()}"></td>
+                                <td><input name="lastName" value="${user.getLastName()}"></td>
+                                <td>
+                                    <select name="city">
+                                        <#list cities as city>
+                                            <#if city.getId() != user.getCity().getId()>
+                                                <option value="${city.getId()}">${city.getCityName()}</option>
+                                            <#else>
+                                                <option value="${city.getId()}" selected>${city.getCityName()}</option>
+                                            </#if>
+                                        </#list>
+                                    </select>
+                                </td>
+                                <td><input name="role" value="${user.getRole()}"></td>
+                                <td>
+                                        <input type="submit" value="Сохранить">
+                                </td>
+                            </form>
+                        <#else>
+                            <td>${user.getEmail()}</td>
+                            <td>${user.getFirstName()}</td>
+                            <td>${user.getLastName()}</td>
+                            <td>${user.getCity().getCityName()}</td>
+                            <td>${user.getRole()}</td>
+                            <td>
+                                <form method="get" action="/administrator/users/${user.id}/edit">
+                                    <input type="submit" value="Изменить">
+                                </form>
+                            </td>
+                        </#if>
                         <td>
                             <form method="post" action="/administrator/users/${user.id}/delete">
                                 <input type="submit" value="Удалить">
