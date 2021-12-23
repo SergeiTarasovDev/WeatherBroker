@@ -18,4 +18,7 @@ public interface CitiesService {
 
     List<City> getCitiesByTemperatureGreaterThan(Double temperature);
     List<City> getCitiesByTemperatureLessThan(Double temperature);
+    Map<City, Integer> getAllCitiesWithCountUsers();
+
+    Map<City, Integer> getAllCitiesByTemperature(String side, Integer temperature);
 }

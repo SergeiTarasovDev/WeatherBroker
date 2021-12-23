@@ -15,6 +15,7 @@ import ru.pcs.weatherbroker.services.UsersService;
 import java.util.List;
 
 @Controller
+@RequestMapping("/administrator/users")
 public class UsersController {
 
     @Autowired
@@ -23,14 +24,26 @@ public class UsersController {
     @Autowired
     private CitiesService citiesService;
 
-    @GetMapping("/administrator/users")
+    @GetMapping()
     public String getAllUsers(Model model) {
         List<User> users = usersService.getAllUsers();
+        List<City> cities = citiesService.getAllCities();
         model.addAttribute("users", users);
+        model.addAttribute("cities", cities);
         return "users";
     }
 
-    @GetMapping("/administrator/users/{user-id}/edit")
+    @GetMapping("/filtred")
+    public String getFiltredUsers(Model model,
+                                  @RequestParam("city-id") Integer cityId) {
+        List<User> users = usersService.getUserByCity(cityId);
+        List<City> cities = citiesService.getAllCities();
+        model.addAttribute("users", users);
+        model.addAttribute("cities", cities);
+        return "users";
+    }
+
+    @GetMapping("/{user-id}/edit")
     public String editUser(Model model, @PathVariable("user-id") Integer userId) {
         List<User> users = usersService.getAllUsers();
         User editUser = usersService.getUser(userId);
@@ -41,13 +54,13 @@ public class UsersController {
         return "users";
     }
 
-    @PostMapping("/administrator/users/{user-id}/update")
+    @PostMapping("/{user-id}/update")
     public String updateUserForAdmin(UserFormForAdmin userFormForAdmin, @PathVariable("user-id") Integer userId) {
         usersService.updateUserForAdmin(userId, userFormForAdmin);
         return "redirect:/administrator/users";
     }
 
-    @PostMapping("/administrator/users/{user-id}/delete")
+    @PostMapping("/{user-id}/delete")
     public String deleteUser(@PathVariable("user-id") Integer userId) {
         usersService.deleteUser(userId);
         return "redirect:/administrator/users";

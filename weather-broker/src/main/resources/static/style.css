@@ -4,7 +4,7 @@ h2, h3 {margin: 0 0 13px;}
 h2 {border-bottom: solid 2px #b4c9b4; padding-bottom: 6px;}
 .header {margin: 50px auto; width: max-content;}
 .main {display: table-row; height: 100%;}
-.content {width: max-content; margin: 0 auto;}
+.content {width: 1000px; margin: 0 auto;}
 .footer {padding: 30px; text-align: center; font-size: 1.3em; border-top: solid 1px #ccc;}
 .menu {position: fixed; right: 0; top: 0; padding: 10px 20px;}
 .menu p {text-align: right; margin: 4px 10px;}
@@ -26,7 +26,15 @@ h2 {border-bottom: solid 2px #b4c9b4; padding-bottom: 6px;}
 th {padding: 3px 7px;}
 .th {width: min-content;}
 .tabs {margin: 6px 34px;}
-.tab {display: inline-block; border: solid 2px #ccc; margin: -8px -2px; padding: 7px 12px; font-size: 17px; border-radius: 10px 10px 0 0; border-color: #ccc #ccc green; background: #eee;}
+.tab {display: inline-block; border: solid 2px #ccc; margin: -8px -2px; padding: 8px 40px; font-size: 17px; border-radius: 10px 10px 0 0; border-color: #ccc #ccc green; background: #eee;}
 .data {border: solid 2px green; margin: 0; padding: 20px; border-radius: 6px;}
-.active {border: solid 2px green; background: #c4e1c4; border-bottom: solid 2px #c4e1c4; color: #484848; font-weight: 700;}
+.active {border: solid 2px green; background: #fff; border-bottom: solid 2px #d2e3d2; color: #484848; font-weight: 700;}
+.center {width: max-content; margin: 0 auto;}
+.left {padding-left: 10px}
+td {padding: 4px 7px;}
+.inline {display: inline-block;}
 .filter {margin-bottom: 40px;}
+.filters {margin-bottom: 32px;}
+.filters form {background: #d2e3d2; padding: 14px 22px; border-radius: 5px;}
+.empty-list {text-align: center; margin: 30px 0 10px; color: indianred;}
+a div {width: max-content; text-decoration: underline; padding: 10px 10px 11px;}

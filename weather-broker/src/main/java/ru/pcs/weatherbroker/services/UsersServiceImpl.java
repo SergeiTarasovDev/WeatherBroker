@@ -7,8 +7,10 @@ import ru.pcs.weatherbroker.forms.UserForm;
 import ru.pcs.weatherbroker.forms.UserFormForAdmin;
 import ru.pcs.weatherbroker.models.City;
 import ru.pcs.weatherbroker.models.User;
+import ru.pcs.weatherbroker.repositories.CitiesRepository;
 import ru.pcs.weatherbroker.repositories.UsersRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -17,6 +19,7 @@ public class UsersServiceImpl implements UsersService {
 
     private final PasswordEncoder passwordEncoder;
     private final UsersRepository usersRepository;
+    private final CitiesRepository citiesRepository;
 
     @Override
     public User getUser(Integer userId) {
@@ -26,6 +29,22 @@ public class UsersServiceImpl implements UsersService {
     @Override
     public List<User> getAllUsers() {
         return usersRepository.findAll();
+    }
+
+    @Override
+    public List<User> getUserByCity(Integer cityId) {
+        List<User> users = this.getAllUsers();
+        List<User> filtredUsers = new ArrayList<>();
+
+        if (users != null) {
+            for (User user : users) {
+                if (user.getCity().getId() == cityId) {
+                    filtredUsers.add(user);
+                }
+            }
+        }
+
+        return filtredUsers;
     }
 
     @Override
@@ -54,5 +73,4 @@ public class UsersServiceImpl implements UsersService {
 //        user.setRole(User.Role.valueOf(userFormForAdmin.getRole().toString()));
         usersRepository.save(user);
     }
-
 }

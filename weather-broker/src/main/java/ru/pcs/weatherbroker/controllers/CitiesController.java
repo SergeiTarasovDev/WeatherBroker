@@ -11,8 +11,10 @@ import ru.pcs.weatherbroker.models.User;
 import ru.pcs.weatherbroker.services.CitiesService;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
+@RequestMapping("/administrator/cities")
 public class CitiesController {
 
     private final CitiesService citiesService;
@@ -22,21 +24,29 @@ public class CitiesController {
         this.citiesService = citiesService;
     }
 
-    @GetMapping("administrator/cities")
+    @GetMapping()
     public String getAllCities(Model model) {
-        List<City> cities = citiesService.getAllCities();
+        Map<City, Integer> cities = citiesService.getAllCitiesWithCountUsers();
         model.addAttribute("cities", cities);
         return "cities";
     }
 
-    @PostMapping("/administrator/cities")
+    @GetMapping("/filtred")
+    public String getAllCitiesByTemperature(Model model,
+                                            @RequestParam("side") String side,
+                                            @RequestParam("temperature") Integer temperature) {
+        Map<City, Integer> cities = citiesService.getAllCitiesByTemperature(side, temperature);
+        model.addAttribute("cities", cities);
+        return "cities";
+    }
+
+    @PostMapping()
     public String addCity(CityForm form) {
         citiesService.addCity(form);
         return "redirect:/administrator/cities";
     }
 
-
-    @DeleteMapping("/administrator/cities/{city-id}/delete")
+    @PostMapping("/{city-id}/delete")
     public String deleteCity(@PathVariable("city-id") Integer cityId) {
         citiesService.deleteCity(cityId);
         return "redirect:/administrator/cities";

@@ -72,7 +72,40 @@ public class CitiesServiceImpl implements CitiesService {
         return citiesRepository.findCityByTemperatureLessThan(temperature);
     }
 
+    private Map<City, Integer> getCitiesWithCountUsers(List<City> cities) {
+        Map<City, Integer> map = new HashMap<>();
 
+        if (cities != null) {
+            for (City city : cities) {
+                Integer countUsers = usersRepository.countUsersByCity(city);
+                map.put(city, countUsers);
+            }
+        }
+        return map;
+    }
 
+    @Override
+    public Map<City, Integer> getAllCitiesWithCountUsers() {
+        List<City> cities = citiesRepository.findAll();
+        Map<City, Integer> map = this.getCitiesWithCountUsers(cities);
 
+        return map;
+    }
+
+    @Override
+    public Map<City, Integer> getAllCitiesByTemperature(String side, Integer temperature) {
+        List<City> cities = citiesRepository.findAll();
+        List<City> filtredCities = new ArrayList<>();
+
+        if (cities != null) {
+            for (City city : cities) {
+                if ((side.equals("great") && city.getTemperature() > temperature) || (side.equals("less") && city.getTemperature() < temperature)) {
+                    filtredCities.add(city);
+                }
+            }
+        }
+
+        Map<City, Integer> map = this.getCitiesWithCountUsers(filtredCities);
+        return map;
+    }
 }

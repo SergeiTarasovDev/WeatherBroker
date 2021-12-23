@@ -39,55 +39,55 @@
                 </form>
             </div>
 
-            <!--<h2>Фильтр городов</h2>
-            <form method="get" action="/cities">
-                <p><input type="radio" name="great" value="great">Выше введенной температуры</p>
-                <p><input type="radio" name="less" value="less">Ниже введенной температуры</p>
-                <p><input name="temperature" placeholder="Введите температуру"></p>
-                <input type="submit" value="Фильтровать">
-            </form>-->
-
-            <div class="filter">
-            <h3>Фильтр</h3>
-                <div>
-                    <ul>
-                        <li><a href="/cities/0/temp-great">Города, в которых температура выше 0 градусов</a></li>
-                        <li><a href="/cities/0/temp-less">Города, в которых температура ниже 0 градусов</a></li>
-                    </ul>
-                </div>
+            <div class="filters">
+                <h2>Фильтр городов</h2>
+                <form method="get" action="/administrator/cities/filtred" name="filter">
+                    <div class="inline" style="border-right: solid 2px green;"><a href="/administrator/cities"><div>Все города</div></a></div>
+                    <div class="inline" style="margin-left: 10px">По критериям:</div>
+                    <div class="inline"><input type="radio" name="side" value="great" checked>выше</div>
+                    <div class="inline"><input type="radio" name="side" value="less">ниже</div>
+                    <div class="inline"><input name="temperature" placeholder="Введите температуру"></div>
+                    <input type="submit" value="Фильтр" class="inline">
+                </form>
             </div>
 
             <h2>Список городов</h2>
-            <table>
-                <tr>
-                    <th><div class="th">ID</div></th>
-                    <th><div class="th">Название</div></th>
-                    <th><div class="th">Температура воздуха</div></th>
-                    <th><div class="th">Атмосферное давление</div></th>
-                    <th><div class="th">Относительная влажность</div></th>
-                    <th><div class="th">Скорость ветра</div></th>
-                    <th><div class="th">Направление ветра</div></th>
-                    <th><div class="th">Действие</div></th>
-                </tr>
-                <#list cities as city>
+            <#if cities?has_content>
+                <table>
                     <tr>
-                        <td>${city.id}</td>
-                        <td>${city.cityName}</td>
-                        <td>${city.temperature}</td>
-                        <td>${city.pressure}</td>
-                        <td>${city.humidity}</td>
-                        <td>${city.windSpeed}</td>
-                        <td>${city.windDeg}</td>
-                        <td>
-                            <form method="post" action="/administrator/cities/${city.id}/delete">
-                                <input type="submit" value="Удалить">
-                            </form>
-                            <!--<a href="/cities/${city.id}">Перейти</a>-->
-                        </td>
+                        <th><div class="th">ID</div></th>
+                        <th><div class="th">Название</div></th>
+                        <th><div class="th">Температура воздуха</div></th>
+                        <th><div class="th">Атмосферное давление</div></th>
+                        <th><div class="th">Относительная влажность</div></th>
+                        <th><div class="th">Скорость ветра</div></th>
+                        <th><div class="th">Направление ветра</div></th>
+                        <th><div class="th">Количество пользователей</div></th>
+                        <th><div class="th">Действие</div></th>
                     </tr>
-
-                </#list>
-            </table>
+                    <#list cities as city, countUsers>
+                        <tr>
+                            <td><div class="center">${city.getId()}</div></td>
+                            <td><div class="left">${city.getCityName()}</div></td>
+                            <td><div class="center">${city.getTemperature()}</div></td>
+                            <td><div class="center">${city.getPressure()}</div></td>
+                            <td><div class="center">${city.getHumidity()}</div></td>
+                            <td><div class="center">${city.getWindSpeed()}</div></td>
+                            <td><div class="center">${city.getWindDeg()}</div></td>
+                            <td><div class="center">${countUsers}</div></td>
+                            <td>
+                                <div class="center">
+                                    <form method="post" action="/administrator/cities/${city.id}/delete">
+                                        <input type="submit" value="Удалить">
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </#list>
+                </table>
+            <#else>
+                <div class="empty-list">Нет городов с такой погодой</div>
+            </#if>
         </div>
     </div>
 </div>

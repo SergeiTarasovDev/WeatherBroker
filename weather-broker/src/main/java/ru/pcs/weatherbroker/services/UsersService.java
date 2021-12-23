@@ -14,6 +14,10 @@ public interface UsersService {
     void updateUser(Integer userId, UserForm userForm);
     void updateUserForAdmin(Integer userId, UserFormForAdmin userFormForAdmin);
 
+    List<User> getUserByCity(Integer cityId);
+
+
+
     /*void addUser(UserForm form);
 
     List<Car> getCarsByUser(Integer userId);
