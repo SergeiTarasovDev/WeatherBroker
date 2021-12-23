@@ -5,9 +5,10 @@ import lombok.Data;
 @Data
 public class CityForm {
     private String cityName;
-    private Double temperature;
+    private Integer temperature;
     private Integer pressure;
     private Integer humidity;
     private Double windSpeed;
     private Integer windDeg;
+    private String icon;
 }

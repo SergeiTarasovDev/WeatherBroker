@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.pcs.weatherbroker.forms.SignUpForm;
 import ru.pcs.weatherbroker.models.City;
-import ru.pcs.weatherbroker.models.User;
 import ru.pcs.weatherbroker.services.CitiesService;
 import ru.pcs.weatherbroker.services.SignUpService;
 

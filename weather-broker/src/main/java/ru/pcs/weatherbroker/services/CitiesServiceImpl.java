@@ -1,11 +1,9 @@
 package ru.pcs.weatherbroker.services;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.pcs.weatherbroker.forms.CityForm;
 import ru.pcs.weatherbroker.models.City;
-import ru.pcs.weatherbroker.models.User;
 import ru.pcs.weatherbroker.repositories.CitiesRepository;
 import ru.pcs.weatherbroker.repositories.UsersRepository;
 
@@ -27,11 +25,12 @@ public class CitiesServiceImpl implements CitiesService {
 
                 City city = City.builder()
                         .cityName(form.getCityName())
-                        .temperature(Double.parseDouble(weather.get("temperature")))
+                        .temperature(Integer.parseInt(weather.get("temperature")))
                         .pressure(Double.parseDouble(weather.get("pressure")))
                         .humidity(Integer.parseInt(weather.get("humidity")))
                         .windSpeed(Double.parseDouble(weather.get("windSpeed")))
                         .windDeg(Integer.parseInt(weather.get("windDeg")))
+                        .icon(weather.get("icon"))
                         .build();
 
                 citiesRepository.save(city);
@@ -55,21 +54,6 @@ public class CitiesServiceImpl implements CitiesService {
     @Override
     public City getCity(Integer cityId) {
         return citiesRepository.findCityById(cityId);
-    }
-
-    @Override
-    public List<User> getUserByCity(Integer cityId) {
-        return usersRepository.findAllByCity_Id(cityId);
-    }
-
-    @Override
-    public List<City> getCitiesByTemperatureGreaterThan(Double temperature) {
-        return citiesRepository.findCityByTemperatureGreaterThan(temperature);
-    }
-
-    @Override
-    public List<City> getCitiesByTemperatureLessThan(Double temperature) {
-        return citiesRepository.findCityByTemperatureLessThan(temperature);
     }
 
     private Map<City, Integer> getCitiesWithCountUsers(List<City> cities) {

@@ -5,7 +5,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import ru.pcs.weatherbroker.forms.UserForm;
 import ru.pcs.weatherbroker.forms.UserFormForAdmin;
-import ru.pcs.weatherbroker.models.City;
 import ru.pcs.weatherbroker.models.User;
 import ru.pcs.weatherbroker.repositories.CitiesRepository;
 import ru.pcs.weatherbroker.repositories.UsersRepository;
@@ -70,7 +69,7 @@ public class UsersServiceImpl implements UsersService {
         user.setLastName(userFormForAdmin.getLastName());
         user.setEmail(userFormForAdmin.getEmail());
         user.setCity(userFormForAdmin.getCity());
-//        user.setRole(User.Role.valueOf(userFormForAdmin.getRole().toString()));
+        user.setRole(userFormForAdmin.getRole());
         usersRepository.save(user);
     }
 }

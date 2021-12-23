@@ -3,14 +3,12 @@ package ru.pcs.weatherbroker.services;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import ru.pcs.weatherbroker.models.User;
-import ru.pcs.weatherbroker.repositories.CitiesRepository;
 import ru.pcs.weatherbroker.repositories.UsersRepository;
 
 @RequiredArgsConstructor
 @Component
 public class AccountServiceImpl implements AccountService {
 
-    private final CitiesRepository citiesRepository;
     private final UsersRepository usersRepository;
     private final WeatherService weatherService;
 

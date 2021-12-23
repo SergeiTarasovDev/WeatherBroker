@@ -19,11 +19,12 @@ public class City {
     private Integer id;
 
     private String cityName;
-    private Double temperature;
+    private Integer temperature;
     private Double pressure;
     private Integer humidity;
     private Double windSpeed;
     private Integer windDeg;
+    private String icon;
 
     @OneToMany(mappedBy = "city")
     private List<User> users;

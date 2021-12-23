@@ -14,16 +14,18 @@
 
 <div class="main">
     <div class="content">
-        <form method="post" action="/signIn">
-            <p><div style="width: 100px;">Email:</div>
-            <input type="email" name="email" placeholder="Введите e-mail...">
-            </p>
-            <p><div style="width: 100px;">Пароль:</div>
-            <input type="password" name="password" placeholder="Введите пароль...">
-            </p>
-            <input type="submit" name="signIn" value="Войти">
-            <p><a href="/signUp">Зарегистрироваться</a></p>
-        </form>
+        <div class="sign">
+            <form method="post" action="/signIn">
+                <p><div style="width: 100px;">Email:</div>
+                <input type="email" name="email" placeholder="Введите e-mail...">
+                </p>
+                <p><div style="width: 100px;">Пароль:</div>
+                <input type="password" name="password" placeholder="Введите пароль...">
+                </p>
+                <div class="sign-button"><input type="submit" name="signIn" value="Войти"></div>
+                <p style="text-align: center; font-size: 14px;"><a href="/signUp">Зарегистрироваться</a></p>
+            </form>
+        </div>
     </div>
 </div>
 

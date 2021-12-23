@@ -14,29 +14,33 @@
 
 <div class="main">
     <div class="content">
-        <form method="post" action="/signUp">
-            <p><div style="width: 100px;">Имя:</div>
-                <input name="firstName" placeholder="Введите имя...">
-            </p>
-            <p><div style="width: 100px;">Фамилия:</div>
-                <input name="lastName" placeholder="Введите фамилию...">
-            </p>
-            <p><div style="width: 100px;">Email:</div>
-                <input type="email" name="email" placeholder="Введите e-mail...">
-            </p>
-            <p><div style="width: 100px;">Пароль:</div>
-                <input type="password" name="password" placeholder="Введите пароль...">
-            </p>
-            <p><div style="width: 100px;">Город:</div>
-            <select name="city">
-                <#list cities as city>
-                    <option value="${city.id}">${city.cityName}</option>
-                </#list>
-            </select>
-            </p>
-            <input type="submit" value="Регистрация">
-            <p><a href="/signIn">Войти</a></p>
-        </form>
+        <div class="sign">
+            <form method="post" action="/signUp">
+                <p><div style="width: 100px;">Имя:</div>
+                    <input name="firstName" placeholder="Введите имя...">
+                </p>
+                <p><div style="width: 100px;">Фамилия:</div>
+                    <input name="lastName" placeholder="Введите фамилию...">
+                </p>
+                <p><div style="width: 100px;">Email:</div>
+                    <input type="email" name="email" placeholder="Введите e-mail...">
+                </p>
+                <p><div style="width: 100px;">Пароль:</div>
+                    <input type="password" name="password" placeholder="Введите пароль...">
+                </p>
+                <p><div style="width: 100px;">Город:</div>
+                    <div class="select">
+                        <select name="city">
+                            <#list cities as city>
+                                <option value="${city.id}">${city.cityName}</option>
+                            </#list>
+                        </select>
+                    </div>
+                </p>
+                <div class="sign-button"><input type="submit" name="signUp" value="Регистрация"></div>
+                <p style="text-align: center; font-size: 14px;"><a href="/signIn">Войти</a></p>
+            </form>
+        </div>
     </div>
 </div>
 

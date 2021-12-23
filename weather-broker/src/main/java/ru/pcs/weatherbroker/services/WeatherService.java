@@ -3,14 +3,10 @@ package ru.pcs.weatherbroker.services;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import ru.pcs.weatherbroker.forms.UserForm;
 import ru.pcs.weatherbroker.models.City;
-import ru.pcs.weatherbroker.models.User;
 import ru.pcs.weatherbroker.repositories.CitiesRepository;
 
-import javax.annotation.PostConstruct;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.*;
@@ -67,6 +63,7 @@ public class WeatherService {
         text = text.replaceAll("\\:\\{", "");
         text = text.replaceAll("\\{", "");
         text = text.replaceAll("\\}", "");
+        text = text.replaceAll("]", "");
 
         String firstPart;
         String secondPart;
@@ -92,21 +89,25 @@ public class WeatherService {
                 case "deg":
                     result.put("windDeg", secondPart);
                     break;
+                case "icon":
+                    result.put("icon", secondPart);
+                    break;
             }
         }
 
         return result;
     }
 
-    public void update(City city, Map<String, String> weather) {
+    public void updateWeather(City city, Map<String, String> weather) {
         System.out.println(city.getCityName());
-        System.out.println(city.getTemperature() + ", " + city.getPressure() + ", " + city.getHumidity() + ", " + city.getWindSpeed() + ", " + city.getWindDeg());
-        city.setTemperature(Double.parseDouble(weather.get("temperature")));
+        System.out.println(city.getTemperature() + ", " + city.getPressure() + ", " + city.getHumidity() + ", " + city.getWindSpeed() + ", " + city.getWindDeg() + ", " + city.getIcon());
+        city.setTemperature((int) Math.round(Double.parseDouble(weather.get("temperature"))));
         city.setPressure(Double.parseDouble(weather.get("pressure")));
         city.setHumidity(Integer.parseInt(weather.get("humidity")));
         city.setWindSpeed(Double.parseDouble(weather.get("windSpeed")));
         city.setWindDeg(Integer.parseInt(weather.get("windDeg")));
-        System.out.println(city.getTemperature() + ", " + city.getPressure() + ", " + city.getHumidity() + ", " + city.getWindSpeed() + ", " + city.getWindDeg());
+        city.setIcon(weather.get("icon"));
+        System.out.println(city.getTemperature() + ", " + city.getPressure() + ", " + city.getHumidity() + ", " + city.getWindSpeed() + ", " + city.getWindDeg() + ", " + city.getIcon());
 
         citiesRepository.save(city);
     }
@@ -124,7 +125,7 @@ public class WeatherService {
                         }
                         Map<String, String> weather = this.parseJson(unparsedWeather);
 
-                        this.update(city, weather);
+                        this.updateWeather(city, weather);
                         Thread.sleep(20000);
                     }
             } catch (Exception e) {

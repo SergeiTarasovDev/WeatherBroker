@@ -69,7 +69,11 @@
                         <tr>
                             <td><div class="center">${city.getId()}</div></td>
                             <td><div class="left">${city.getCityName()}</div></td>
-                            <td><div class="center">${city.getTemperature()}</div></td>
+                            <td><div class="center">${city.getTemperature()}
+                                    <div class="icon-img">
+                                        <img class="icon" src="http://openweathermap.org/img/wn/${city.getIcon()}@2x.png">
+                                    </div>
+                                </div></td>
                             <td><div class="center">${city.getPressure()}</div></td>
                             <td><div class="center">${city.getHumidity()}</div></td>
                             <td><div class="center">${city.getWindSpeed()}</div></td>

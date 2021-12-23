@@ -23,6 +23,7 @@
     <div class="content">
         <div class="city-weather">
             <h2>г. ${user.getCity().getCityName()}</h2>
+            <img class="icon" src="http://openweathermap.org/img/wn/${user.getCity().getIcon()}@2x.png">
 
             <table>
                 <tr>
@@ -59,6 +60,7 @@
         <#if city??>
             <div class="city-weather">
                 <h2>г. ${city.getCityName()}</h2>
+                <img class="icon" src="http://openweathermap.org/img/wn/${city.getIcon()}@2x.png">
 
                 <table>
                     <tr>

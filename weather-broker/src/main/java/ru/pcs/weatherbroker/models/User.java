@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.pcs.weatherbroker.forms.UserFormForAdmin;
 
 import javax.persistence.*;
 
@@ -32,8 +31,19 @@ public class User {
     private String hashPassword;
     private String firstName;
     private String lastName;
+    private String telegramId;
 
     @ManyToOne
     @JoinColumn(name = "city_id")
     private City city;
+
+    public void setRole(String role) {
+        if (role.equals("ADMIN")) {
+            this.role = Role.ADMIN;
+        } else {
+            this.role = Role.USER;
+        }
+    }
 }
+
+

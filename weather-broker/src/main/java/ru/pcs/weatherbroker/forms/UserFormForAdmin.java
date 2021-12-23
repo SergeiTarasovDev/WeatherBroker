@@ -10,7 +10,6 @@ public class UserFormForAdmin {
     String email;
     String firstName;
     String lastName;
-    //todo: не обнавляется роль из формы
-//    Role role;
+    String role;
     City city;
 }
