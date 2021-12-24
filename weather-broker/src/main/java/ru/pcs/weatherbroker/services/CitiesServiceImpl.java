@@ -25,7 +25,7 @@ public class CitiesServiceImpl implements CitiesService {
 
                 City city = City.builder()
                         .cityName(form.getCityName())
-                        .temperature(Integer.parseInt(weather.get("temperature")))
+                        .temperature((int) Math.round(Double.parseDouble(weather.get("temperature"))))
                         .pressure(Double.parseDouble(weather.get("pressure")))
                         .humidity(Integer.parseInt(weather.get("humidity")))
                         .windSpeed(Double.parseDouble(weather.get("windSpeed")))

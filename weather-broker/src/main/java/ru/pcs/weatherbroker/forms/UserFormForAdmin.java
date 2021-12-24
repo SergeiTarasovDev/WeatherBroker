@@ -12,4 +12,5 @@ public class UserFormForAdmin {
     String lastName;
     String role;
     City city;
+    String telegramId;
 }

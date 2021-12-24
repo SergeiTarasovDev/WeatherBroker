@@ -12,22 +12,18 @@ import ru.pcs.weatherbroker.services.*;
 
 import java.util.List;
 
-@RequiredArgsConstructor
 @Controller
+@RequiredArgsConstructor
 public class AccountController {
 
-    @Autowired
-    private AccountService accountService;
-
-    @Autowired
-    private UsersService usersService;
-
-    @Autowired
-    private CitiesService citiesService;
+    private final AccountService accountService;
+    private final UsersService usersService;
+    private final CitiesService citiesService;
 
     @GetMapping("/account")
     public String getUserPage(Model model,
                               @AuthenticationPrincipal(expression = "id") Integer authId) throws InterruptedException {
+
         User user = usersService.getUser(authId);
         List<City> cities = citiesService.getAllCities();
         model.addAttribute("user", user);
@@ -61,7 +57,8 @@ public class AccountController {
     }
 
     @PostMapping("account/{user-id}/update")
-    public String updateUserData(@PathVariable("user-id") Integer userId, UserForm userForm) {
+    public String updateUserData(@PathVariable("user-id") Integer userId,
+                                 UserForm userForm) {
         usersService.updateUser(userId, userForm);
         return "redirect:/account";
     }

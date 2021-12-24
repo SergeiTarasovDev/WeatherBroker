@@ -30,11 +30,12 @@
             <div class="city-add">
                 <form method="post" action="/administrator/cities">
                     <input name="cityName" placeholder="Добавить город...">
-                    <input type="hidden" name="temperature" value="-100.0">
+                    <input type="hidden" name="temperature" value="-100">
                     <input type="hidden" name="pressure" value="-100">
                     <input type="hidden" name="humidity" value="-100">
                     <input type="hidden" name="windSpeed" value="-100.0">
                     <input type="hidden" name="windDeg" value="-100">
+                    <input type="hidden" name="icon" value="03d">
                     <input type="submit" value="Добавить">
                 </form>
             </div>
@@ -67,13 +68,13 @@
                     </tr>
                     <#list cities as city, countUsers>
                         <tr>
-                            <td><div class="center">${city.getId()}</div></td>
-                            <td><div class="left">${city.getCityName()}</div></td>
-                            <td><div class="center">${city.getTemperature()}
+                            <td><div class="center">${city.getId()}
                                     <div class="icon-img">
                                         <img class="icon" src="http://openweathermap.org/img/wn/${city.getIcon()}@2x.png">
                                     </div>
                                 </div></td>
+                            <td><div class="left">${city.getCityName()}</div></td>
+                            <td><div class="center">${city.getTemperature()}</div></td>
                             <td><div class="center">${city.getPressure()}</div></td>
                             <td><div class="center">${city.getHumidity()}</div></td>
                             <td><div class="center">${city.getWindSpeed()}</div></td>

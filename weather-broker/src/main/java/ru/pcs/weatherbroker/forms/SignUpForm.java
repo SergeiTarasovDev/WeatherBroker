@@ -10,5 +10,6 @@ public class SignUpForm {
     private String email;
     private String password;
     private City city;
+    private String telegramId;
 }
 

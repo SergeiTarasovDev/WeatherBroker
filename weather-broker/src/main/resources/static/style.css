@@ -10,11 +10,12 @@ h2 {border-bottom: solid 2px #b4c9b4; padding-bottom: 6px;}
 .menu p {text-align: right; margin: 4px 10px;}
 
 /* sign-in page */
-.sign {width: max-content; margin: 0 auto; border: solid 2px green; padding: 10px 30px; font-size: 18px;}
-.sign input {padding: 5px;}
-.sign-button {margin: 28px auto 0; width: max-content;}
-.sign-button input {font-size: 17px; padding: 10px 20px;}
-.sign select {width: -webkit-fill-available; padding: 6px 5px;}
+.sign, .user-edit {width: max-content; margin: 0 auto; border: solid 2px green; padding: 10px 30px; font-size: 18px;}
+.sign input, .user-edit input {padding: 5px;}
+.sign-button, .user-edit-button{margin: 28px auto 0; width: max-content;}
+.sign-button input, .user-edit-button input {font-size: 17px; padding: 10px 20px;}
+.sign select, .user-edit select {width: -webkit-fill-available; padding: 6px 5px;}
+
 
 /* user page */
 .city-weather {width: max-content; margin: 0 auto 30px; position: relative;}
@@ -48,4 +49,4 @@ td {padding: 4px 7px;}
 .empty-list {text-align: center; margin: 30px 0 10px; color: indianred;}
 a div {width: max-content; text-decoration: underline; padding: 10px 10px 11px;}
 .icon-img {position: relative;: relative;}
-img.icon {position: absolute; width: 30px; background: lightblue; top: -25px; right: 180px; border-radius: 40px;}
+img.icon {position: absolute; width: 30px; background: lightblue; top: -25px; right: -54px; border-radius: 40px;}

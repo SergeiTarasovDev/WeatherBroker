@@ -1,6 +1,7 @@
 package ru.pcs.weatherbroker.controllers;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,9 +12,9 @@ import ru.pcs.weatherbroker.services.SignUpService;
 
 import java.util.List;
 
-@RequiredArgsConstructor
 @Controller
 @RequestMapping("/signUp")
+@RequiredArgsConstructor
 public class SignUpController {
 
     private final SignUpService signUpService;

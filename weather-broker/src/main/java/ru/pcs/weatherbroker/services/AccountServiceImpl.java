@@ -18,9 +18,7 @@ public class AccountServiceImpl implements AccountService {
 
         User user = usersRepository.getById(userId);
         String userRole = user.getRole().toString();
-        if (userRole.equals("ADMIN")) {
-            return "redirect:/administrator/cities";
-        }
-        return "account";
+
+        return (userRole.equals("ADMIN")) ? "redirect:/administrator/cities" : "account";
     }
 }

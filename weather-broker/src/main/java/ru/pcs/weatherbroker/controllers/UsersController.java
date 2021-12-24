@@ -1,5 +1,6 @@
 package ru.pcs.weatherbroker.controllers;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,18 +9,15 @@ import ru.pcs.weatherbroker.forms.UserFormForAdmin;
 import ru.pcs.weatherbroker.models.*;
 import ru.pcs.weatherbroker.services.*;
 
-import java.util.Collections;
 import java.util.List;
 
 @Controller
 @RequestMapping("/administrator/users")
+@RequiredArgsConstructor
 public class UsersController {
 
-    @Autowired
-    private UsersService usersService;
-
-    @Autowired
-    private CitiesService citiesService;
+    private final UsersService usersService;
+    private final CitiesService citiesService;
 
     @GetMapping()
     public String getAllUsers(Model model) {

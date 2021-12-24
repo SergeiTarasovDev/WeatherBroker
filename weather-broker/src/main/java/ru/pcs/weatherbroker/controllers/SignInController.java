@@ -5,10 +5,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/signIn")
 public class SignInController {
 
-    @GetMapping
+    @GetMapping("")
+    public String getSignPageOnStartup() {
+        return "redirect:/signIn";
+    }
+
+    @GetMapping("/signIn")
     public String getSignPage() {
         return "signIn";
     }

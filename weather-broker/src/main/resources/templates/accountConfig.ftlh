@@ -21,36 +21,52 @@
 
 <div class="main">
     <div class="content">
-       <form method="post" action="/account/${user.getId()}/update">
-           <p><div style="width: 100px;">Имя:</div>
-           <input name="firstName" value="${user.getFirstName()}">
-           </p>
-           <p><div style="width: 100px;">Фамилия:</div>
-           <input name="lastName" value="${user.getLastName()}">
-           </p>
-           <p><div style="width: 100px;">Email:</div>
-           <input type="email" name="email" value="${user.getEmail()}">
-           </p>
-           <p><div style="width: 100px;">Пароль:</div>
-           <input type="password" name="password" placeholder="Введите новый пароль...">
-           </p>
-           <p><div style="width: 100px;">Город:</div>
-           <select name="city">
-               <#list cities as city>
-                   <#if city.getId() == user.getCity().getId()>
-                       <option value="${city.id}" selected>${city.cityName}</option>
-                   <#else>
-                       <option value="${city.id}">${city.cityName}</option>
-                   </#if>
-               </#list>
-           </select>
-           </p>
-           <input type="submit" value="Сохранить">
-       </form>
+        <div class="user-edit">
+            <form method="post" action="/account/${user.getId()}/update">
+                <table>
+                    <tr>
+                        <td>Имя:</td>
+                        <td><input name="firstName" value="${user.getFirstName()}"></td>
+                    </tr>
+                    <tr>
+                        <td>Фамилия:</td>
+                        <td><input name="lastName" value="${user.getLastName()}"></td>
+                    </tr>
+                <tr>
+                        <td>Email:</td>
+                        <td><input type="email" name="email" value="${user.getEmail()}"></td>
+                    </tr>
+                <tr>
+                        <td>Пароль:</td>
+                        <td><input type="password" name="password" placeholder="Новый пароль..."></td>
+                    </tr>
+                <tr>
+                        <td>Город:</td>
+                        <td>
+                            <div class="select">
+                                <select name="city">
+                                    <#list cities as city>
+                                        <#if city.getId() == user.getCity().getId()>
+                                            <option value="${city.id}" selected>${city.cityName}</option>
+                                        <#else>
+                                            <option value="${city.id}">${city.cityName}</option>
+                                        </#if>
+                                    </#list>
+                                </select>
+                            </div>
+                        </td>
+                    </tr>
+                <tr>
+                        <td>Telegram ID:</td>
+                        <td><input name="telegramId" value="${user.getTelegramId()}"></td>
+                    </tr>
+                </table>
+                <div class="user-edit-button"><input type="submit" value="Изменить"></div>
+                <p style="text-align: center; font-size: 14px;"><a href="/account">Отмена</a></p>
+            </form>
+        </div>
     </div>
 </div>
-
-
 
 <div class="footer">Тарасов Сергей, 2021</div>
 

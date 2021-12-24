@@ -38,11 +38,7 @@ public class User {
     private City city;
 
     public void setRole(String role) {
-        if (role.equals("ADMIN")) {
-            this.role = Role.ADMIN;
-        } else {
-            this.role = Role.USER;
-        }
+        this.role = (role.equals("ADMIN")) ? Role.ADMIN : Role.USER;
     }
 }
 

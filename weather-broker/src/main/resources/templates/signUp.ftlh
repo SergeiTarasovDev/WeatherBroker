@@ -37,14 +37,15 @@
                         </select>
                     </div>
                 </p>
+                <p><div style="width: 100px;">Telegram ID:</div>
+                <input name="telegramId" placeholder="Telegram ID">
+                </p>
                 <div class="sign-button"><input type="submit" name="signUp" value="Регистрация"></div>
                 <p style="text-align: center; font-size: 14px;"><a href="/signIn">Войти</a></p>
             </form>
         </div>
     </div>
 </div>
-
-
 
 <div class="footer">Тарасов Сергей, 2021</div>
 

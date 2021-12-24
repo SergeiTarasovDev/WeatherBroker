@@ -54,11 +54,17 @@ public class UsersServiceImpl implements UsersService {
     @Override
     public void updateUser(Integer userId, UserForm userForm) {
         User user = usersRepository.getById(userId);
+
         user.setFirstName(userForm.getFirstName());
         user.setLastName(userForm.getLastName());
         user.setEmail(userForm.getEmail());
-        user.setHashPassword(passwordEncoder.encode(userForm.getPassword()));
         user.setCity(userForm.getCity());
+        user.setTelegramId(userForm.getTelegramId());
+
+        if (!userForm.getPassword().equals("")) {
+            user.setHashPassword(passwordEncoder.encode(userForm.getPassword()));
+        }
+
         usersRepository.save(user);
     }
 

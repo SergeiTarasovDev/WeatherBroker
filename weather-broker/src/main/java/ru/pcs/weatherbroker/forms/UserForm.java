@@ -10,4 +10,5 @@ public class UserForm {
     String firstName;
     String lastName;
     City city;
+    String telegramId;
 }

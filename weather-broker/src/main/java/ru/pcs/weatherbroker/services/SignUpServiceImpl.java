@@ -25,6 +25,7 @@ public class SignUpServiceImpl implements SignUpService {
                 .role(User.Role.USER)
                 .hashPassword(passwordEncoder.encode(form.getPassword()))
                 .city(form.getCity())
+                .telegramId(form.getTelegramId())
                 .build();
 
         usersRepository.save(user);

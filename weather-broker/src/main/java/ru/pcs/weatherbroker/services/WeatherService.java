@@ -19,19 +19,19 @@ import java.util.Map;
 public class WeatherService {
     private static final String USER_AGENT = "Mozilla/5.0";
 
-    @Autowired
-    CitiesRepository citiesRepository;
+    private final CitiesRepository citiesRepository;
 
     /**
      * The method gets the weather in the city by the zip-code from API OpenWeather
      * Example requests:
      *  - by city id: api.openweathermap.org/data/2.5/weather?id={city id}&appid={API key}
      *  - by zip-code: api.openweathermap.org/data/2.5/weather?zip={zip code},{country code}&appid={API key}
+     *  Example: http://api.openweathermap.org/data/2.5/weather?q=" + cityName + ",ru&callback=test&lang=ru&appid=cf24ec3cb89a0e6975864d4439b03f69&units=metric
      * @param cityName city name by which you need to get data
      * @throws Exception
      */
     public String getWeather(String cityName) {
-        String url = "http://api.openweathermap.org/data/2.5/weather?q=" + cityName + ",ru&callback=test&lang=ru&appid=cf24ec3cb89a0e6975864d4439b03f69&units=metric";
+        String url = "http://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&callback=test&lang=ru&appid=cf24ec3cb89a0e6975864d4439b03f69&units=metric";
         try {
             URL objUrl = new URL(url);
             HttpURLConnection con = (HttpURLConnection) objUrl.openConnection();
@@ -50,7 +50,7 @@ public class WeatherService {
 
             return response.toString();
         } catch (Exception e) {
-            System.out.println("Weather API get error");
+            System.err.println("Weather API:" + e);
             return "-1";
         }
     }
