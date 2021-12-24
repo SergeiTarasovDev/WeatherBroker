@@ -18,16 +18,17 @@ public class SignUpServiceImpl implements SignUpService {
 
     @Override
     public void signUpUser(SignUpForm form) {
-        User user = User.builder()
-                .firstName(form.getFirstName())
-                .lastName(form.getLastName())
-                .email(form.getEmail())
-                .role(User.Role.USER)
-                .hashPassword(passwordEncoder.encode(form.getPassword()))
-                .city(form.getCity())
-                .telegramId(form.getTelegramId())
-                .build();
-
-        usersRepository.save(user);
+        if (!form.getEmail().equals("") || form.getCity() != null || !form.getPassword().equals("")) {
+            User user = User.builder()
+                    .firstName(form.getFirstName())
+                    .lastName(form.getLastName())
+                    .email(form.getEmail())
+                    .role(User.Role.USER)
+                    .hashPassword(passwordEncoder.encode(form.getPassword()))
+                    .city(form.getCity())
+                    .telegramId(form.getTelegramId())
+                    .build();
+            usersRepository.save(user);
+        }
     }
 }

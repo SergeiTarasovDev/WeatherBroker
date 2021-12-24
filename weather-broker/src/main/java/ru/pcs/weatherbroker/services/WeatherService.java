@@ -1,7 +1,6 @@
 package ru.pcs.weatherbroker.services;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import ru.pcs.weatherbroker.models.City;
@@ -31,6 +30,7 @@ public class WeatherService {
      * @throws Exception
      */
     public String getWeather(String cityName) {
+        cityName = cityName.trim();
         String url = "http://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&callback=test&lang=ru&appid=cf24ec3cb89a0e6975864d4439b03f69&units=metric";
         try {
             URL objUrl = new URL(url);
@@ -56,7 +56,6 @@ public class WeatherService {
     }
 
     public Map<String, String> parseJson(String text) {
-
         Map<String, String> result = new HashMap<>();
 
         text = text.replaceAll("\"", "");

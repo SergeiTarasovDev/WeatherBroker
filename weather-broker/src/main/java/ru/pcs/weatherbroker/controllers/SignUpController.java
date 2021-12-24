@@ -1,7 +1,6 @@
 package ru.pcs.weatherbroker.controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -24,12 +23,14 @@ public class SignUpController {
     public String getSignUpPage(Model model) {
         List<City> cities = citiesService.getAllCities();
         model.addAttribute("cities", cities);
+
         return "signUp";
     }
 
     @PostMapping
     public String signUpUser(SignUpForm form) {
         signUpService.signUpUser(form);
+
         return "signIn";
     }
 

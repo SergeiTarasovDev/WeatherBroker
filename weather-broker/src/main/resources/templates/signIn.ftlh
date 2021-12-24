@@ -11,6 +11,9 @@
 <body>
 
 <div class="header"><h1>Innopolis Weather Broker</h1></div>
+<#if isAdd??>
+    <h1>ERROR</h1>
+</#if>
 
 <div class="main">
     <div class="content">

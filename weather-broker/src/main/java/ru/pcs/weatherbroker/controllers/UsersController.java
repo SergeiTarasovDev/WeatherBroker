@@ -1,7 +1,7 @@
 package ru.pcs.weatherbroker.controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,32 +20,54 @@ public class UsersController {
     private final CitiesService citiesService;
 
     @GetMapping()
-    public String getAllUsers(Model model) {
+    public String getAllUsers(Model model,
+                              @AuthenticationPrincipal(expression = "id") Integer authId) {
+        User user = usersService.getUser(authId);
+        model.addAttribute("user", user);
+
         List<User> users = usersService.getAllUsers();
-        List<City> cities = citiesService.getAllCities();
         model.addAttribute("users", users);
+
+        List<City> cities = citiesService.getAllCities();
         model.addAttribute("cities", cities);
+
         return "users";
     }
 
     @GetMapping("/filtred")
     public String getFiltredUsers(Model model,
-                                  @RequestParam("city-id") Integer cityId) {
+                                  @RequestParam("city-id") Integer cityId,
+                                  @AuthenticationPrincipal(expression = "id") Integer authId) {
+
+        User user = usersService.getUser(authId);
+        model.addAttribute("user", user);
+
         List<User> users = usersService.getUserByCity(cityId);
-        List<City> cities = citiesService.getAllCities();
         model.addAttribute("users", users);
+
+        List<City> cities = citiesService.getAllCities();
         model.addAttribute("cities", cities);
+
         return "users";
     }
 
     @GetMapping("/{user-id}/edit")
-    public String editUser(Model model, @PathVariable("user-id") Integer userId) {
+    public String editUser(Model model,
+                           @PathVariable("user-id") Integer userId,
+                           @AuthenticationPrincipal(expression = "id") Integer authId) {
+
+        User user = usersService.getUser(authId);
+        model.addAttribute("user", user);
+
         List<User> users = usersService.getAllUsers();
-        User editUser = usersService.getUser(userId);
-        List<City> cities = citiesService.getAllCities();
         model.addAttribute("users", users);
+
+        User editUser = usersService.getUser(userId);
         model.addAttribute("editUser", editUser);
+
+        List<City> cities = citiesService.getAllCities();
         model.addAttribute("cities", cities);
+
         return "users";
     }
 

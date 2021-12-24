@@ -1,7 +1,6 @@
 package ru.pcs.weatherbroker.controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,8 +24,9 @@ public class AccountController {
                               @AuthenticationPrincipal(expression = "id") Integer authId) throws InterruptedException {
 
         User user = usersService.getUser(authId);
-        List<City> cities = citiesService.getAllCities();
         model.addAttribute("user", user);
+
+        List<City> cities = citiesService.getAllCities();
         model.addAttribute("cities", cities);
 
         return accountService.getAuthorizedUserPage(authId);
@@ -36,31 +36,38 @@ public class AccountController {
     public String getAnotherCityPage(Model model,
                                      @RequestParam(name = "cityId") Integer cityId,
                                      @AuthenticationPrincipal(expression = "id") Integer authId) {
-        User user = usersService.getUser(authId);
-        List<City> cities = citiesService.getAllCities();
-        City city = citiesService.getCity(cityId);
 
+        User user = usersService.getUser(authId);
         model.addAttribute("user", user);
+
+        List<City> cities = citiesService.getAllCities();
         model.addAttribute("cities", cities);
+
+        City city = citiesService.getCity(cityId);
         model.addAttribute("city", city);
+
         return "account";
     }
 
     @GetMapping("account/config")
     public String getUserConfig(Model model,
                                 @AuthenticationPrincipal(expression = "id") Integer authId) {
-        User user = usersService.getUser(authId);
+
         List<City> cities = citiesService.getAllCities();
-        model.addAttribute("user", user);
         model.addAttribute("cities", cities);
+
+        User user = usersService.getUser(authId);
+        model.addAttribute("user", user);
+
         return "accountConfig";
     }
 
     @PostMapping("account/{user-id}/update")
     public String updateUserData(@PathVariable("user-id") Integer userId,
                                  UserForm userForm) {
+
         usersService.updateUser(userId, userForm);
+
         return "redirect:/account";
     }
-
 }

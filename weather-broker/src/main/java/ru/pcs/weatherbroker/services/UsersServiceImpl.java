@@ -53,17 +53,21 @@ public class UsersServiceImpl implements UsersService {
 
     @Override
     public void updateUser(Integer userId, UserForm userForm) {
+
         User user = usersRepository.getById(userId);
 
-        user.setFirstName(userForm.getFirstName());
-        user.setLastName(userForm.getLastName());
-        user.setEmail(userForm.getEmail());
-        user.setCity(userForm.getCity());
-        user.setTelegramId(userForm.getTelegramId());
+        String temp = userForm.getEmail().replaceAll("[^a-zA-Z]", "");
 
+        if (!temp.equals("")) {
+            user.setEmail(userForm.getEmail());
+        }
         if (!userForm.getPassword().equals("")) {
             user.setHashPassword(passwordEncoder.encode(userForm.getPassword()));
         }
+        user.setFirstName(userForm.getFirstName());
+        user.setLastName(userForm.getLastName());
+        user.setCity(userForm.getCity());
+        user.setTelegramId(userForm.getTelegramId());
 
         usersRepository.save(user);
     }
@@ -78,4 +82,7 @@ public class UsersServiceImpl implements UsersService {
         user.setRole(userFormForAdmin.getRole());
         usersRepository.save(user);
     }
+
+    //todo: проверка уникальности поля email, при изменении пользователя
+
 }

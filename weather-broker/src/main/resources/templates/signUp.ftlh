@@ -12,6 +12,10 @@
 
 <div class="header"><h1>Innopolis Weather Broker</h1></div>
 
+<#if isAdded??>
+    <h1 style="color: red;">Ошибка</h1>
+</#if>
+
 <div class="main">
     <div class="content">
         <div class="sign">

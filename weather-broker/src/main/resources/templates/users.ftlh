@@ -11,6 +11,9 @@
 <body>
 
 <div class="menu">
+    <p style="font-size: 20px; border-bottom: solid 2px green; padding: 0 10px; margin-bottom: 7px;">
+        <a href="/account">${user.getFirstName()} ${user.getLastName()}</a></p>
+    <p><a href="/account/config">настройки</a></p>
     <p><a href="/logout">выход</a></p>
 </div>
 
@@ -46,7 +49,7 @@
             <div class="users">
                 <h2>Список пользователей</h2>
                 <#if users?has_content>
-                    <table>
+                    <table class="zebra-table">
                         <tr>
                             <th><div class="th">ID</div></th>
                             <th><div class="th">Email</div></th>
@@ -54,10 +57,10 @@
                             <th><div class="th">Фамилия</div></th>
                             <th><div class="th">Город</div></th>
                             <th><div class="th">Права</div></th>
-                            <th><div class="th" colspan="2">Действие</div></th>
+                            <th colspan="2"><div class="th">Действие</div></th>
                         </tr>
                         <#list users as user>
-                            <tr>
+                            <tr class="row">
                                 <td>${user.getId()}</td>
                                 <#if editUser?? && cities?? && editUser.getId() == user.getId()>
                                     <form method="post" action="/administrator/users/${user.id}/update">

@@ -77,19 +77,26 @@ public class CitiesServiceImpl implements CitiesService {
     }
 
     @Override
-    public Map<City, Integer> getAllCitiesByTemperature(String side, Integer temperature) {
-        List<City> cities = citiesRepository.findAll();
-        List<City> filtredCities = new ArrayList<>();
+    public Map<City, Integer> getAllCitiesByTemperature(String side, String temperatureString) {
 
-        if (cities != null) {
-            for (City city : cities) {
-                if ((side.equals("great") && city.getTemperature() > temperature) || (side.equals("less") && city.getTemperature() < temperature)) {
-                    filtredCities.add(city);
+        String temp = temperatureString.replaceAll("[^\\d]", "");
+        if (!temp.equals("")) {
+            Integer temperature = Integer.parseInt(temp);
+
+            List<City> cities = citiesRepository.findAll();
+            List<City> filtredCities = new ArrayList<>();
+
+            if (cities != null) {
+                for (City city : cities) {
+                    if ((side.equals("great") && city.getTemperature() > temperature) || (side.equals("less") && city.getTemperature() < temperature)) {
+                        filtredCities.add(city);
+                    }
                 }
             }
-        }
 
-        Map<City, Integer> map = this.getCitiesWithCountUsers(filtredCities);
-        return map;
+            Map<City, Integer> map = this.getCitiesWithCountUsers(filtredCities);
+            return map;
+        }
+        return null;
     }
 }

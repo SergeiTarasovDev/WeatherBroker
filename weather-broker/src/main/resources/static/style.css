@@ -32,8 +32,11 @@ h2 {border-bottom: solid 2px #b4c9b4; padding-bottom: 6px;}
 .city-weather .icon {position: absolute; right: 20px; top: -25px; background: lightblue; border-radius: 70px; width: 65px;}
 
 /* administrator page */
+.zebra-table {border-spacing: 0;}
+.zebra-table tr:nth-child(odd) {background:#e4ebed;}
+tr.row:hover, .zebra-table tr:nth-child(odd):hover {background: lightblue;}
 .city-add {text-align: right;}
-th {padding: 3px 7px;}
+th {background: #c9d4d7; padding: 8px;}
 .th {width: min-content;}
 .tabs {margin: 6px 34px;}
 .tab {display: inline-block; border: solid 2px #ccc; margin: -8px -2px; padding: 8px 40px; font-size: 17px; border-radius: 10px 10px 0 0; border-color: #ccc #ccc green; background: #eee;}
@@ -41,7 +44,7 @@ th {padding: 3px 7px;}
 .active {border: solid 2px green; background: #fff; border-bottom: solid 2px #d2e3d2; color: #484848; font-weight: 700;}
 .center {width: max-content; margin: 0 auto;}
 .left {padding-left: 60px}
-td {padding: 4px 7px;}
+td {padding: 7px;}
 .inline {display: inline-block;}
 .filter {margin-bottom: 40px;}
 .filters {margin-bottom: 32px;}
@@ -50,3 +53,4 @@ td {padding: 4px 7px;}
 a div {width: max-content; text-decoration: underline; padding: 10px 10px 11px;}
 .icon-img {position: relative;: relative;}
 img.icon {position: absolute; width: 30px; background: lightblue; top: -25px; right: -54px; border-radius: 40px;}
+.users {width: max-content; margin: 0 auto;}

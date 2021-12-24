@@ -11,6 +11,9 @@
 <body>
 
 <div class="menu">
+    <p style="font-size: 20px; border-bottom: solid 2px green; padding: 0 10px; margin-bottom: 7px;">
+        <a href="/account">${user.getFirstName()} ${user.getLastName()}</a></p>
+    <p><a href="/account/config">настройки</a></p>
     <p><a href="/logout">выход</a></p>
 </div>
 
@@ -54,7 +57,7 @@
 
             <h2>Список городов</h2>
             <#if cities?has_content>
-                <table>
+                <table class="zebra-table">
                     <tr>
                         <th><div class="th">ID</div></th>
                         <th><div class="th">Название</div></th>
@@ -67,19 +70,25 @@
                         <th><div class="th">Действие</div></th>
                     </tr>
                     <#list cities as city, countUsers>
-                        <tr>
+                        <tr class="row">
                             <td><div class="center">${city.getId()}
                                     <div class="icon-img">
                                         <img class="icon" src="http://openweathermap.org/img/wn/${city.getIcon()}@2x.png">
                                     </div>
                                 </div></td>
                             <td><div class="left">${city.getCityName()}</div></td>
-                            <td><div class="center">${city.getTemperature()}</div></td>
-                            <td><div class="center">${city.getPressure()}</div></td>
-                            <td><div class="center">${city.getHumidity()}</div></td>
-                            <td><div class="center">${city.getWindSpeed()}</div></td>
-                            <td><div class="center">${city.getWindDeg()}</div></td>
-                            <td><div class="center">${countUsers}</div></td>
+                            <td><div class="center">${city.getTemperature()} °С</div></td>
+                            <td><div class="center">${city.getPressure()} мм</div></td>
+                            <td><div class="center">${city.getHumidity()} %</div></td>
+                            <td><div class="center">${city.getWindSpeed()} м/сек</div></td>
+                            <td><div class="center">${city.getWindDeg()} °</div></td>
+                            <td><div class="center">
+                                    <#if countUsers == 0>
+                                        -
+                                    <#else>
+                                        <a href="/administrator/users/filtred?city-id=${city.getId()}" style="text-decoration: underline;">${countUsers}</a>
+                                    </#if>
+                                </div></td>
                             <td>
                                 <div class="center">
                                     <form method="post" action="/administrator/cities/${city.id}/delete">

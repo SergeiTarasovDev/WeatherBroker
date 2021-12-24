@@ -12,5 +12,5 @@ public interface CitiesService {
     void deleteCity(Integer cityId);
     City getCity(Integer cityId);
     Map<City, Integer> getAllCitiesWithCountUsers();
-    Map<City, Integer> getAllCitiesByTemperature(String side, Integer temperature);
+    Map<City, Integer> getAllCitiesByTemperature(String side, String temperature);
 }
