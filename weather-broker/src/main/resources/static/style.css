@@ -1,0 +1,56 @@
+body {margin: 0 auto; display: table; min-height: 100vh; width: -webkit-fill-available; width: -moz-available;}
+a, a:hover, a:focus, a:active, a:visited {color: #555; text-decoration: none;}
+h2, h3 {margin: 0 0 13px;}
+h2 {border-bottom: solid 2px #b4c9b4; padding-bottom: 6px;}
+.header {margin: 50px auto; width: max-content;}
+.main {display: table-row; height: 100%;}
+.content {width: 1000px; margin: 0 auto 50px;}
+.footer {padding: 30px; text-align: center; font-size: 1.3em; border-top: solid 1px #ccc;}
+.menu {position: fixed; right: 0; top: 0; padding: 10px 20px;}
+.menu p {text-align: right; margin: 4px 10px;}
+
+/* sign-in page */
+.sign, .user-edit {width: max-content; margin: 0 auto; border: solid 2px green; padding: 10px 30px; font-size: 18px;}
+.sign input, .user-edit input {padding: 5px;}
+.sign-button, .user-edit-button{margin: 28px auto 0; width: max-content;}
+.sign-button input, .user-edit-button input {font-size: 17px; padding: 10px 20px;}
+.sign select, .user-edit select {width: -webkit-fill-available; padding: 6px 5px;}
+
+
+/* user page */
+.city-weather {width: max-content; margin: 0 auto 30px; position: relative;}
+.city-weather, .search-city-weather {border: solid 1px #aaa; border-radius: 14px; padding: 20px;    width: max-content; margin: 20px auto 40px;}
+.search-city-weather form {width: max-content; margin: 0 auto;}
+.search-city-weather select {font-size: 17px; padding: 4px 5px 6px; vertical-align: top; display: inline;}
+.search-city-weather input[type="submit"] {font-size: 21px; padding: 0 5px; margin: 0 9px;}
+.param-name, .param-value {margin: 3px; padding: 5px 10px; border-radius: 7px;}
+.param-temperature {background: #e6caad6e;}
+.param-pressure {background: #b1e6ad6e;}
+.param-humidity {background: #e6e4ad6e;}
+.param-wind {background: #add8e66e;}
+.users input[type="submit"] {width: -webkit-fill-available;}
+.city-weather .icon {position: absolute; right: 20px; top: -25px; background: lightblue; border-radius: 70px; width: 65px;}
+
+/* administrator page */
+.zebra-table {border-spacing: 0;}
+.zebra-table tr:nth-child(odd) {background:#e4ebed;}
+tr.row:hover, .zebra-table tr:nth-child(odd):hover {background: lightblue;}
+.city-add {text-align: right;}
+th {background: #c9d4d7; padding: 8px;}
+.th {width: min-content;}
+.tabs {margin: 6px 34px;}
+.tab {display: inline-block; border: solid 2px #ccc; margin: -8px -2px; padding: 8px 40px; font-size: 17px; border-radius: 10px 10px 0 0; border-color: #ccc #ccc green; background: #eee;}
+.data {border: solid 2px green; margin: 0; padding: 20px; border-radius: 6px;}
+.active {border: solid 2px green; background: #fff; border-bottom: solid 2px #d2e3d2; color: #484848; font-weight: 700;}
+.center {width: max-content; margin: 0 auto;}
+.left {padding-left: 60px}
+td {padding: 7px;}
+.inline {display: inline-block;}
+.filter {margin-bottom: 40px;}
+.filters {margin-bottom: 32px;}
+.filters form {background: #d2e3d2; padding: 14px 22px; border-radius: 5px;}
+.empty-list {text-align: center; margin: 30px 0 10px; color: indianred;}
+a div {width: max-content; text-decoration: underline; padding: 10px 10px 11px;}
+.icon-img {position: relative;: relative;}
+img.icon {position: absolute; width: 30px; background: lightblue; top: -25px; right: -54px; border-radius: 40px;}
+.users {width: max-content; margin: 0 auto;}
